@@ -17,8 +17,13 @@ export interface Version {
 
 const versions: Version[] = [
   {
+    number: 4,
+    link: "https://kittichotekamalapirat.github.io/",
+    thumbnail: "/v4.webp",
+  },
+  {
     number: 3,
-    link: "https://kittishane.com/",
+    link: "https://kittichote.vercel.app/",
     thumbnail: "/v3.webp",
   },
   {
@@ -36,10 +41,13 @@ const versions: Version[] = [
 interface Props {
   close: () => void;
   className?: string;
+  "aria-hidden"?: boolean;
 }
 
-const TimeMachineOverlay = ({ close, className }: Props) => {
-  const [currentVersion, setCurrentVersion] = useState<number>(3); // 1-based
+const TimeMachineOverlay = ({ close, className, ...rest }: Props) => {
+  const [currentVersion, setCurrentVersion] = useState<number>(
+    versions.length
+  ); // 1-based
 
   const enablePrev = currentVersion >= 2;
   const enableNext = currentVersion <= versions.length - 1;
@@ -53,11 +61,17 @@ const TimeMachineOverlay = ({ close, className }: Props) => {
     setCurrentVersion(currentVersion - 1);
   };
   return (
-    <div className={cn("flex items-center justify-center", className)}>
-      <IoMdClose
+    <div
+      className={cn("flex items-center justify-center", className)}
+      {...rest}
+    >
+      <button
         onClick={close}
-        class="top-4 right-4 absolute w-8 h-8 hover:cursor-pointer text-foreground-primary"
-      />
+        aria-label="Close time machine"
+        className="top-4 right-4 absolute"
+      >
+        <IoMdClose className="w-8 h-8 text-foreground-primary" />
+      </button>
       <TimeMachine versions={versions} currentVersion={currentVersion} />
 
       <div
@@ -69,20 +83,22 @@ const TimeMachineOverlay = ({ close, className }: Props) => {
       >
         <button
           onClick={handlePrev}
+          aria-label="Previous version"
           disabled={!enablePrev}
           className="disabled:opacity-50 text-foreground-primary"
         >
-          <FaChevronUp class="hidden md:block" />
-          <FaChevronLeft class="md:hidden" />
+          <FaChevronUp className="hidden md:block" />
+          <FaChevronLeft className="md:hidden" />
         </button>
         <span className="text-foreground-primary">V.{currentVersion}</span>
         <button
           onClick={handleNext}
+          aria-label="Next version"
           disabled={!enableNext}
           className="disabled:opacity-50 text-foreground-primary"
         >
-          <FaChevronDown class="hidden md:block" />
-          <FaChevronRight class="md:hidden" />
+          <FaChevronDown className="hidden md:block" />
+          <FaChevronRight className="md:hidden" />
         </button>
       </div>
     </div>

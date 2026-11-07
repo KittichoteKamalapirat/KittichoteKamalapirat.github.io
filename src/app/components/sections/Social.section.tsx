@@ -19,19 +19,19 @@ const socials: Social[] = [
     ariaLabel: "LinkedIn",
     href: linkedInLink,
     icon: (
-      <FaLinkedin class="w-6 h-6 hover:text-foreground-interactive-hover" />
+      <FaLinkedin className="w-6 h-6 hover:text-foreground-interactive-hover" />
     ),
   },
   {
     ariaLabel: "Github",
     href: githubLink,
-    icon: <FaGithub class="w-6 h-6 hover:text-foreground-interactive-hover" />,
+    icon: <FaGithub className="w-6 h-6 hover:text-foreground-interactive-hover" />,
   },
   {
     ariaLabel: "Resume",
     href: cvLink,
     icon: (
-      <AiFillProfile class="w-6 h-6 hover:text-foreground-interactive-hover" />
+      <AiFillProfile className="w-6 h-6 hover:text-foreground-interactive-hover" />
     ),
   },
 ];

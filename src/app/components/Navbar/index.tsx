@@ -38,7 +38,7 @@ const Navbar = () => {
       )}
     >
       <div className="mx-auto flex flex-wrap items-center justify-between p-4">
-        <Logo class={cn("w-8 h-8 text-foreground-primary")} />
+        <Logo className={cn("w-8 h-8 text-foreground-primary")} />
 
         <ColorThemeToggler />
       </div>

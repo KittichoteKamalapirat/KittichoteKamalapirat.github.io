@@ -2,7 +2,7 @@
 import { useInView } from "react-intersection-observer";
 import Container from "./components/Container";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "../lib/cn";
 import MouseUpdater from "./components/MouseUpdater";
 import Navbar from "./components/Navbar";
@@ -23,28 +23,14 @@ export default function Home() {
   const [currentSection, setCurrentSection] = useState<SectionState>("about");
   const [showTimeMachine, setShowTimeMachine] = useState<boolean>(false);
 
-  const appRef = useRef<any>(); // TODO: fix any
-  const {
-    ref: aboutRef,
-    inView: aboutInView,
-    entry: aboutEntry,
-  } = useInView({
-    threshold: 0.5,
-  });
-  const {
-    ref: expRef,
-    inView: expInView,
-    entry: expEntry,
-  } = useInView({
-    threshold: 1,
-  });
-  const {
-    ref: projectsRef,
-    inView: projectsInView,
-    entry: projectsEntry,
-  } = useInView({
-    threshold: 0.5,
-  });
+  // a section is "current" when it crosses a line 30% down the viewport,
+  // which works regardless of how tall the section is
+  const inViewOptions = { rootMargin: "-30% 0px -70% 0px" };
+  const { ref: aboutRef, inView: aboutInView } = useInView(inViewOptions);
+  const { ref: expRef, inView: expInView } = useInView(inViewOptions);
+  const { ref: projectsRef, inView: projectsInView } =
+    useInView(inViewOptions);
+  const { ref: writingRef, inView: writingInView } = useInView(inViewOptions);
 
   useEffect(() => {
     if (aboutInView) setCurrentSection("about");
@@ -58,10 +44,22 @@ export default function Home() {
     if (projectsInView) setCurrentSection("projects");
   }, [projectsInView]);
 
+  useEffect(() => {
+    if (writingInView) setCurrentSection("writing");
+  }, [writingInView]);
+
+  useEffect(() => {
+    if (!showTimeMachine) return;
+    const closeOnEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowTimeMachine(false);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [showTimeMachine]);
+
   return (
     <main
       className="flex min-h-screen flex-col items-center justify-between bg-background-primary pb-12 relative"
-      ref={appRef}
     >
       <Navbar />
 
@@ -92,7 +90,7 @@ export default function Home() {
             <div ref={projectsRef}>
               <ProjectSection className="mt-20 lg:mt-16" />
             </div>
-            <div>
+            <div ref={writingRef}>
               <BlogSection className="mt-20 lg:mt-16" />
             </div>
             <ToolsSection className="mt-20 lg:mt-24" />
@@ -111,10 +109,12 @@ export default function Home() {
           showTimeMachine ? "opacity-100 z-[100]" : "opacity-0 -z-10"
         )}
         close={() => setShowTimeMachine(false)}
+        aria-hidden={!showTimeMachine}
       />
 
       <button
         className="absolute bottom-0 right-0"
+        aria-label="Open the time machine to see previous versions"
         onClick={() => setShowTimeMachine(true)}
       >
         <Image

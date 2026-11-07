@@ -22,3 +22,9 @@
   opacity: 0.4;
   z-index: 10;
 }
+
+.time:nth-child(n + 4) {
+  transform: translateY(-24%) scale(0.7);
+  opacity: 0.2;
+  z-index: 0;
+}

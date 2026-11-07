@@ -8,15 +8,12 @@ export interface ColorThemeTogglerProps {
 }
 
 const ColorThemeToggler = ({ className }: ColorThemeTogglerProps) => {
-  const { mode, setMode } = useThemeSwitcher();
-
-  const handleToggleMode = () => {
-    setMode(mode === "light" ? "dark" : "light");
-  };
+  const { mode, toggleMode } = useThemeSwitcher();
 
   return (
     <button
-      onClick={handleToggleMode}
+      onClick={toggleMode}
+      aria-label={mode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
       className={cn(
         "h-10 w-10 rounded-full bg-black p-1 text-white dark:bg-white dark:text-black",
         className

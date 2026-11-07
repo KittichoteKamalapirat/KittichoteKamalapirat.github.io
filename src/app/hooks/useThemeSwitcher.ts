@@ -1,34 +1,25 @@
 import { useEffect, useState } from "react";
 
 type Mode = "light" | "dark" | null;
+
+const preferDarkQuery = "(prefers-color-scheme: dark)";
+
+const applyMode = (mode: "light" | "dark") =>
+  document.documentElement.classList.toggle("dark", mode === "dark");
+
 export const useThemeSwitcher = () => {
-  const preferDarkQuery = "(prefers-color-schema: dark)";
   const [mode, setMode] = useState<Mode>(null);
 
   useEffect(() => {
-    const userPref = window.localStorage.getItem("theme");
     const mediaQuery = window.matchMedia(preferDarkQuery);
 
-    const preferDarkTheme = mediaQuery.matches;
-
     const handleChange = () => {
-      if (userPref) {
-        if (userPref === "dark") {
-          setMode("dark");
-          document.documentElement.classList.add("dark");
-        } else {
-          setMode("light");
-          document.documentElement.classList.remove("dark");
-        }
+      // user's explicit choice wins over the system preference
+      const userPref = window.localStorage.getItem("theme");
+      if (userPref === "dark" || userPref === "light") {
+        setMode(userPref);
       } else {
-        // visit the site for the first time
-        if (preferDarkTheme) {
-          setMode("dark");
-          document.documentElement.classList.add("dark");
-        } else {
-          setMode("light");
-          document.documentElement.classList.remove("dark");
-        }
+        setMode(mediaQuery.matches ? "dark" : "light");
       }
     };
 
@@ -40,16 +31,16 @@ export const useThemeSwitcher = () => {
   }, []);
 
   useEffect(() => {
-    if (mode === "dark") {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.classList.add("dark");
-      return;
-    }
-    if (mode === "light") {
-      localStorage.setItem("theme", "light");
-      document.documentElement.classList.remove("dark");
-    }
+    if (!mode) return;
+    applyMode(mode);
   }, [mode]);
 
-  return { mode, setMode };
+  // only persist when the user toggles, so system changes keep working otherwise
+  const toggleMode = () => {
+    const next = mode === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    setMode(next);
+  };
+
+  return { mode, toggleMode };
 };

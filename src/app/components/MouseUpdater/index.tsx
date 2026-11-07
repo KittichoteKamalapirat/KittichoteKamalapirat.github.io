@@ -3,9 +3,7 @@ import blobStyles from "./blob.module.css";
 
 const EASE_DURATION = 20;
 const BUBBLE_SIZE = 1200; // match in blob.module.css
-// TODO: fix any
 const MouseUpdater = () => {
-  console.log("rendering MouseUpdater");
   const mouseRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,6 +17,7 @@ const MouseUpdater = () => {
     let targetY = 0;
     let translateX = Math.round(curX);
     let translateY = Math.round(curY);
+    let frame = 0;
 
     function move() {
       if (!bubble) return;
@@ -29,9 +28,7 @@ const MouseUpdater = () => {
       translateY = Math.round(curY) - BUBBLE_SIZE / 2;
 
       bubble.style.transform = `translate(${translateX}px, ${translateY}px)`;
-      requestAnimationFrame(() => {
-        move();
-      });
+      frame = requestAnimationFrame(move);
     }
 
     const updateCursorPosition = (event: MouseEvent) => {
@@ -42,8 +39,10 @@ const MouseUpdater = () => {
 
     move();
 
-    return () =>
-      mouseRef.current?.removeEventListener("mousemove", updateCursorPosition);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("mousemove", updateCursorPosition);
+    };
   }, [mouseRef]);
 
   return <div ref={mouseRef} className={blobStyles.blob} />;

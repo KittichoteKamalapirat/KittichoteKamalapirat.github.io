@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 
-export type SectionState = "about" | "experience" | "projects";
+export type SectionState = "about" | "experience" | "projects" | "writing";
 
 interface SectionNav {
   title: string;
@@ -18,6 +18,7 @@ const sectionNavs: SectionNav[] = [
   { title: "ABOUT", href: "#about", slug: "about" },
   { title: "EXPERIENCE", href: "#experience", slug: "experience" },
   { title: "PROJECTS", href: "#projects", slug: "projects" },
+  { title: "WRITING", href: "#writing", slug: "writing" },
 ];
 
 const BreadCrumbSection = ({ currentSection, className }: Props) => {
