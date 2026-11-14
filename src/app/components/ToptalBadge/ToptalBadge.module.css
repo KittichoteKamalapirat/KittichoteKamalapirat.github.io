@@ -1,0 +1,65 @@
+/* Ported from Toptal's "Top 3% Talent" embed. Class names are scoped by CSS
+   modules so the snippet's short generic names cannot clash with the site. */
+.root {
+  --hex: polygon(50% 0, 100% 24%, 100% 76%, 50% 100%, 0 76%, 0 24%);
+  font-family: proxima-nova, Arial, sans-serif;
+}
+
+.hex {
+  display: inline-block;
+  background: #25a9ef;
+  padding: 6px;
+  clip-path: var(--hex);
+}
+
+.inner {
+  width: 200px;
+  padding: 24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #204ecf;
+  text-align: center;
+  background: radial-gradient(circle at 20% -10%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at -20% 20%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 70% 100%, #00c3ff -80%, #fff 30%),
+    radial-gradient(circle at 120% 80%, #00c3ff -80%, #fff 30%);
+  background-blend-mode: multiply;
+  clip-path: var(--hex);
+  box-shadow: 0 28px 50px rgba(6, 30, 96, 0.35);
+}
+
+.title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rule {
+  width: 120px;
+  height: 1px;
+  background: #25a9ef;
+}
+
+.vetted {
+  font-size: 16px;
+  margin-bottom: -6px;
+}
+
+.hire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  border-radius: 6px;
+  background: #296bff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  /* Tailwind's preflight strips link underlines; the original badge has one */
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-underline-offset: 2px;
+}

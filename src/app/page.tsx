@@ -15,6 +15,7 @@ import HeroSection from "./components/sections/Hero.section";
 import ProjectSection from "./components/sections/Project.section";
 import SocialSection from "./components/sections/Social.section";
 import ToolsSection from "./components/sections/Tools.section";
+import ToptalBadge from "./components/ToptalBadge";
 import BlogSection from "./components/sections/Blog.section";
 import TimeMachineOverlay from "./components/TimeMachine/TimeMachineOverlay";
 import Image from "next/image";
@@ -28,8 +29,7 @@ export default function Home() {
   const inViewOptions = { rootMargin: "-30% 0px -70% 0px" };
   const { ref: aboutRef, inView: aboutInView } = useInView(inViewOptions);
   const { ref: expRef, inView: expInView } = useInView(inViewOptions);
-  const { ref: projectsRef, inView: projectsInView } =
-    useInView(inViewOptions);
+  const { ref: projectsRef, inView: projectsInView } = useInView(inViewOptions);
   const { ref: writingRef, inView: writingInView } = useInView(inViewOptions);
 
   useEffect(() => {
@@ -58,9 +58,7 @@ export default function Home() {
   }, [showTimeMachine]);
 
   return (
-    <main
-      className="flex min-h-screen flex-col items-center justify-between bg-background-primary pb-12 relative"
-    >
+    <main className="flex min-h-screen flex-col items-center justify-between bg-background-primary pb-12 relative">
       <Navbar />
 
       <Container>
@@ -69,7 +67,7 @@ export default function Home() {
           <header
             className={cn(
               "py-20", //mobile
-              "lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24"
+              "lg:sticky lg:top-0 lg:flex lg:h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24",
             )}
           >
             <div>
@@ -93,7 +91,8 @@ export default function Home() {
             <div ref={writingRef}>
               <BlogSection className="mt-20 lg:mt-16" />
             </div>
-            <ToolsSection className="mt-20 lg:mt-24" />
+            <ToptalBadge className="mt-20 lg:mt-24 justify-center sm:justify-start" />
+            <ToolsSection className="mt-12" />
           </main>
         </div>
 
@@ -106,7 +105,7 @@ export default function Home() {
         className={cn(
           "fixed top-0 left-0 w-screen h-screen bg-background-primary",
           "transition-opacity duration-500",
-          showTimeMachine ? "opacity-100 z-[100]" : "opacity-0 -z-10"
+          showTimeMachine ? "opacity-100 z-[100]" : "opacity-0 -z-10",
         )}
         close={() => setShowTimeMachine(false)}
         aria-hidden={!showTimeMachine}
