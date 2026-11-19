@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Small problems, every day · Shane</title>
+<meta name="description" content="Why I built a meal planner when there are already a hundred of them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../post.css">
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="top">
+  <a class="pill" href="../../#writing">← back to Shane</a>
+</div>
+<header class="hd"><div class="in">
+  <span class="tag-t essay">Essay</span><span class="meta">4 min read</span><br>
+  <h1>Small problems, <span>every day</span></h1>
+  <p class="lede">Why I built a meal planner when there are already a hundred of them.</p>
+  <p class="by">Kittichote "Shane" Kamalapirat · November 2026</p>
+</div></header>
+<article>
+<p>Every day I have to decide what to eat. It is a small problem. Nobody loses sleep over it. But I face it every single day, and a small problem you face every day ends up costing more than a large one you face once.</p>
+<p>When I looked at it closely, there were two problems inside the one. The first is that you don't know what to eat. The second is that even when you do know, the ingredients aren't at home, so you can't cook it anyway. Solving the first without the second gets you nowhere. You decide on pesto pasta at six in the evening and discover you have no basil.</p>
+<div class="card l" style="background:var(--y)"><h4>Two causes</h4><div class="row"><span class="n">1</span>You don't know what to eat</div><div class="row"><span class="n">2</span>The ingredients aren't at home</div></div>
+<p>So I made an app. It is called <a href="https://piiman.app">Piiman</a>, the Japanese word for bell pepper, which is my favorite vegetable. It saves recipes from the places you already find them and lets you put them on the days you plan to cook.</p>
+<h2>Why build one more</h2>
+<p>There are already many apps like this. People treat that as a reason not to build another. I read it the other way. A crowded category tells you the problem is real. And none of those apps were made for me.</p>
+<p>I wanted one I could shape to how I cook. I am fairly sure that if I enjoy using something every day, a lot of other people will too. The most reliable way I know to make something people want is to be one of the people who want it.</p>
+<div class="phones "><div class="ph"><div class="im"><img src="../images/save.gif" alt="Piiman recipe library filling with saved recipes" loading="lazy"></div><b>Save</b><small>From Instagram, TikTok, YouTube or a website.</small></div><div class="ph"><div class="im"><img src="../images/plan.gif" alt="Piiman weekly meal plan" loading="lazy"></div><b>Plan</b><small>Put a recipe on the day you will cook it.</small></div><div class="ph"><div class="im"><img src="../images/shop.gif" alt="Piiman shopping list" loading="lazy"></div><b>Shop</b><small>The ingredients become a list.</small></div></div>
+<h2>The part nobody sees</h2>
+<p>The thing I spent the most time on is the least visible. Piiman uses AI to read a recipe out of a video or a web page. The trouble with AI is that it fills gaps with confidence. A recipe app that adds an ingredient the cook never used is worse than one that does nothing, because you find out at the stove.</p>
+<p>So I hold the import to two rules that pull against each other. It must not invent anything that isn't in the source. And it must get out of the source everything that is there. Either rule alone is easy to satisfy: say nothing, or say everything. Satisfying both at once is most of the work.</p>
+<div class="duo"><div class="ph"><div class="im"><img src="../images/import.gif" alt="A recipe being saved from an Instagram post into Piiman" loading="lazy"></div><b>One share</b><small>From a post to a recipe.</small></div><div class="rules"><div class="rule" style="background:var(--g)"><b>Don't make things up</b><p>No ingredient may appear that isn't in the original recipe.</p></div><div class="rule" style="background:var(--y)"><b>Don't leave things out</b><p>Everything the source does say should make it into the recipe.</p></div></div></div>
+<h2>The part that does nothing</h2>
+<p>The feature I like most took far less effort. A small widget on the home screen shows what you are eating today, so there is a little thing to look forward to. If you haven't planned anything, a bell pepper dances there instead.</p>
+<div class="phones two"><div class="ph"><div class="im"><img src="../images/widget.gif" alt="Home screen widget showing tonight's dinner, then the mascot when nothing is planned" loading="lazy"></div><b>The widget</b><small>Tonight's dinner on the home screen.</small></div><div class="ph sq"><div class="im"><img src="../images/mascot.gif" alt="The Piiman bell pepper mascot walking" loading="lazy"></div><b>The mascot</b><small>He shows up when nothing is planned.</small></div></div>
+<p>It isn't in the released version yet. It also does nothing useful, and it is my favorite part. I have come to think the useless details are often the ones that make people keep an app.</p>
+<h2>One a day</h2>
+<p>My goal is 100 customers in the first 90 days. That sounds like a lot until you divide it: about one a day. It shouldn't be that difficult. Whether that turns out to be true is the thing I will find out next.</p>
+<div class="card goal r" style="background:var(--p)"><small>The goal</small><div class="big">100</div><div class="unit">customers</div><p>in the first 90 days</p><span class="tag">That's just 1 customer a day</span></div>
+<p>If you plan your meals, or you have saved a lot of cooking videos you never cooked, <a href="https://piiman.app">try Piiman</a> and tell me what you like or dislike. That is how I'll know what to change.</p>
+</article>
+<div class="hire" id="hire">
+  <h3>Let's make<br>something fun.</h3>
+  <p>Freelance, contract, or full-time. Serious work, unserious energy.</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="pill" style="background:var(--g)" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp" target="_blank" rel="noopener">Toptal ↗</a>
+  </div>
+</div>
+<script>const pr=document.getElementById("prog");addEventListener("scroll",()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-innerHeight)*100)+"%"},{passive:true});</script>
+</body>
+</html>

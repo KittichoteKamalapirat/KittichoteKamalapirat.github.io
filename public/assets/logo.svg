@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 66 66">
+    <defs>
+        <style>.cls-1{fill:none;stroke:#333;stroke-linecap:round;stroke-linejoin:round;stroke-width:6px;}</style>
+    </defs>
+    <title>logo</title>
+    <g id="Text">
+        <polyline class="cls-1" points="43 18 60 18 50.5 27.5"/>
+        <polyline class="cls-1" points="13.84 37 5.84 45 18.84 58 34.84 58 22.34 45.5"/>
+        <polygon class="cls-1" points="38.84 8.08 25.84 8.08 12.84 21.08 41.34 49.58 56.84 49.58 28.09 20.83 38.84 8.08"/>
+    </g>
+</svg>

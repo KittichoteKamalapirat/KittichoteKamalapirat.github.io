@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Piiman: from a daily annoyance to the App Store · Shane</title>
+<meta name="description" content="What I built, the decisions behind it, and where it stands today.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../post.css">
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="top">
+  <a class="pill" href="../../#writing">← back to Shane</a>
+</div>
+<header class="hd"><div class="in">
+  <span class="tag-t case">Case study</span><span class="meta">3 min read</span><br>
+  <h1>Piiman: from a daily annoyance to <span>the App Store</span></h1>
+  <p class="lede">What I built, the decisions behind it, and where it stands today.</p>
+  <p class="by">Kittichote "Shane" Kamalapirat · November 2026</p>
+</div></header>
+<article>
+<div class="facts">
+<div class="fact" style="background:var(--y)"><small>What</small><b>iPhone recipe saver and meal planner</b></div>
+<div class="fact" style="background:var(--g)"><small>My role</small><b>Everything: product, design, code, launch</b></div>
+<div class="fact" style="background:var(--p)"><small>Status</small><b>Live on the App Store since 11 Nov 2026</b></div>
+<div class="fact" style="background:var(--v)"><small>App review</small><b>Approved on the first review</b></div>
+</div>
+<figure><div class="im"><img src="../images/screenshots.png" alt="Four App Store screenshots of Piiman" loading="lazy"></div><figcaption>The App Store screenshots.</figcaption></figure>
+<h2>The <span style="background:var(--o)">problem</span></h2>
+<p>Deciding what to eat is a small problem that returns every day. I traced it to two causes:</p>
+<ul class="plain">
+<li><strong>No idea.</strong> You don't know what to eat.</li>
+<li><strong>No ingredients.</strong> You know, but what you need isn't at home.</li>
+</ul>
+<p>A useful product has to handle both, so Piiman connects three steps that are usually in separate apps.</p>
+<div class="phones "><div class="ph"><div class="im"><img src="../images/save.gif" alt="Piiman recipe library filling with saved recipes" loading="lazy"></div><b>Save</b><small>From Instagram, TikTok, YouTube or a website.</small></div><div class="ph"><div class="im"><img src="../images/plan.gif" alt="Piiman weekly meal plan" loading="lazy"></div><b>Plan</b><small>Put a recipe on the day you will cook it.</small></div><div class="ph"><div class="im"><img src="../images/shop.gif" alt="Piiman shopping list" loading="lazy"></div><b>Shop</b><small>The ingredients become a list.</small></div></div>
+<h2>Three <span>decisions</span></h2>
+<ol class="steps">
+<li><b>Build for one real user first.</b> There are many recipe apps. I built one I could fit to my own cooking, on the bet that a tool I use daily will suit other people too.</li>
+<li><b>Treat AI accuracy as the product.</b> Recipes are imported with AI, and a wrong ingredient is only discovered at the stove. The import follows two rules: nothing invented, nothing left out.</li>
+<li><b>Spend a little on delight.</b> A home screen widget shows tonight's dinner. When nothing is planned, the mascot dances instead.</li>
+</ol>
+<div class="duo"><div class="ph"><div class="im"><img src="../images/import.gif" alt="A recipe being saved from an Instagram post into Piiman" loading="lazy"></div><b>One share</b><small>From a post to a recipe.</small></div><div class="rules"><div class="rule" style="background:var(--g)"><b>Don't make things up</b><p>No ingredient may appear that isn't in the original recipe.</p></div><div class="rule" style="background:var(--y)"><b>Don't leave things out</b><p>Everything the source does say should make it into the recipe.</p></div></div></div>
+<div class="phones two"><div class="ph"><div class="im"><img src="../images/widget.gif" alt="Home screen widget showing tonight's dinner, then the mascot when nothing is planned" loading="lazy"></div><b>The widget</b><small>Tonight's dinner on the home screen.</small></div><div class="ph sq"><div class="im"><img src="../images/mascot.gif" alt="The Piiman bell pepper mascot walking" loading="lazy"></div><b>The mascot</b><small>He shows up when nothing is planned.</small></div></div>
+<p class="note">The widget is built and in testing. It is not in the App Store version yet.</p>
+<h2>How it was <span style="background:var(--b);color:#fff">built</span></h2>
+<p>I built Piiman alone, working with AI coding agents for testing, App Store screenshots, animation and the pre-submission audit. The app is native SwiftUI, with a Next.js API on Vercel and a Supabase database. I asked for an audit against Apple's guidelines before submitting, and the app passed review on the first attempt.</p>
+<h2>Where it <span style="background:var(--g)">stands</span></h2>
+<p>Piiman went live on 11 November 2026. The goal is <mark>100 customers in the first 90 days</mark>, about one a day. Let's see how it goes.</p>
+<div class="card goal r" style="background:var(--p)"><small>The goal</small><div class="big">100</div><div class="unit">customers</div><p>in the first 90 days</p><span class="tag">That's just 1 customer a day</span></div>
+<p><a href="https://piiman.app">See Piiman →</a></p>
+</article>
+<div class="hire" id="hire">
+  <h3>Let's make<br>something fun.</h3>
+  <p>Freelance, contract, or full-time. Serious work, unserious energy.</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="pill" style="background:var(--g)" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp" target="_blank" rel="noopener">Toptal ↗</a>
+  </div>
+</div>
+<script>const pr=document.getElementById("prog");addEventListener("scroll",()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-innerHeight)*100)+"%"},{passive:true});</script>
+</body>
+</html>

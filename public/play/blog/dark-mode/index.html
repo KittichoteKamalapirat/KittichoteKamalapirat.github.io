@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The cleanest way to support dark mode with CSS variables and Tailwind · Shane</title>
+<meta name="description" content="Stop writing dark: on every class. Name colors by purpose, let CSS variables swap them, and let Tailwind read the variables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../post.css">
+<style>
+/* the live demo uses exactly the technique from the post */
+.demo{margin:30px 0;border:4px solid var(--ink);border-radius:20px;box-shadow:7px 7px 0 var(--ink);overflow:hidden}
+.demo .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;background:#fff;border-bottom:4px solid var(--ink);font-weight:800;font-size:15px}
+.switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:800}
+.switch input{appearance:none;width:58px;height:32px;border:3px solid var(--ink);border-radius:999px;background:var(--y);position:relative;cursor:pointer;transition:background .2s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--ink);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.switch input:checked{background:var(--v)}.switch input:checked::after{transform:translateX(26px)}
+.stage{--fg:#121212;--bg2:#ffffff;--muted:#12121299;--accent:#4d7cff;background:var(--bg2);color:var(--fg);padding:26px 22px;transition:background .3s,color .3s}
+.stage.dark{--fg:#f6f1e6;--bg2:#161616;--muted:#f6f1e699;--accent:#ffe14d}
+.stage h4{font-family:"Archivo Black";font-size:24px}
+.stage p{margin:8px 0 0;color:var(--muted);font-size:16px}
+.stage .btn{display:inline-block;margin-top:16px;background:var(--accent);color:#121212;border:3px solid var(--fg);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px;transition:background .3s,border-color .3s}
+.stage .cls{margin-top:18px;font:500 13px "JetBrains Mono",monospace;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="top"><a class="pill" href="../../#writing">← back to Shane</a></div>
+<header class="hd"><div class="in">
+  <span class="tag-t tutorial">Tutorial</span><span class="meta">2 min read</span><br>
+  <h1>The cleanest way to support <span>dark mode</span></h1>
+  <p class="lede">Stop writing <code>dark:</code> on every Tailwind class. Name colors by what they're for, let CSS variables swap them, and let Tailwind read the variables.</p>
+  <p class="by">Kittichote "Shane" Kamalapirat · December 2023</p>
+</div></header>
+<article>
+<figure><div class="im" style="background:#121212"><img src="../../../assets/blog-dark-mode.webp" alt="A laptop showing an app in dark mode next to a cup of coffee" width="1000" height="420"></div></figure>
+<h2>The <span style="background:var(--o)">problem</span></h2>
+<p>To support dark mode with Tailwind, the docs have you write something like this:</p>
+<pre data-file="Card.tsx"><code>&lt;<span class="c-k">div</span> <span class="c-a">className</span>=<span class="c-s">"bg-black dark:bg-white"</span>&gt;
+  &lt;<span class="c-k">p</span> <span class="c-a">className</span>=<span class="c-s">"text-white dark:text-black"</span>&gt;text&lt;/<span class="c-k">p</span>&gt;
+&lt;/<span class="c-k">div</span>&gt;</code></pre>
+<p>That makes your already long Tailwind classes even longer, and every color has to be written twice.</p>
+<p>The fix is <strong>semantic colors</strong>: colors named for their purpose, like <code>background</code>, <code>primary</code>, <code>success</code> or <code>warning</code>, whose actual values change with the current theme.</p>
+<h2>Step 1: toggle a <span>class</span></h2>
+<p>Make sure you can put a <code>dark</code> class on the <code>&lt;html&gt;</code> element.</p>
+<pre data-file="index.html"><code><span class="c-c">&lt;!-- dark mode on --&gt;</span>
+&lt;<span class="c-k">html</span> <span class="c-a">class</span>=<span class="c-s">"dark"</span>&gt;
+
+<span class="c-c">&lt;!-- dark mode off --&gt;</span>
+&lt;<span class="c-k">html</span>&gt;</code></pre>
+<div class="box" style="background:var(--v)">In a real project you'll probably start from the user's system setting with <code>window.matchMedia("(prefers-color-scheme: dark)")</code> and let them override it.</div>
+<h2>Step 2: define the <span style="background:var(--g)">variables</span></h2>
+<p>In <code>globals.css</code>, or any CSS file, give each semantic color one value for light mode and another for dark mode:</p>
+<pre data-file="globals.css"><code><span class="c-k">:root</span> {
+  <span class="c-a">--color-foreground-primary</span>: black;
+  <span class="c-a">--color-background-primary</span>: white;
+}
+
+<span class="c-k">.dark</span> {
+  <span class="c-a">--color-foreground-primary</span>: white;
+  <span class="c-a">--color-background-primary</span>: black;
+}</code></pre>
+<p>Now the variables change on their own whenever the page is in dark mode.</p>
+<h2>Step 3: point <span style="background:var(--b);color:#fff">Tailwind</span> at them</h2>
+<pre data-file="tailwind.config.js"><code>theme: {
+  extend: {
+    colors: {
+      foreground: {
+        primary: <span class="c-s">"var(--color-foreground-primary)"</span>,
+      },
+      background: {
+        primary: <span class="c-s">"var(--color-background-primary)"</span>,
+      },
+    },
+  },
+},</code></pre>
+<h2>The <span style="background:var(--p)">result</span></h2>
+<p>One class per color, and it works in both themes:</p>
+<pre data-file="Card.tsx"><code>&lt;<span class="c-k">div</span> <span class="c-a">className</span>=<span class="c-s">"bg-background-primary"</span>&gt;
+  &lt;<span class="c-k">p</span> <span class="c-a">className</span>=<span class="c-s">"text-foreground-primary"</span>&gt;text&lt;/<span class="c-k">p</span>&gt;
+&lt;/<span class="c-k">div</span>&gt;</code></pre>
+<p><strong>Try it.</strong> This box is built the same way: the card only uses CSS variables, and the switch just adds or removes one <code>dark</code> class.</p>
+<div class="demo">
+  <div class="bar"><span>Live demo</span><label class="switch"><input type="checkbox" id="dm" aria-label="Dark mode">Dark mode</label></div>
+  <div class="stage" id="stage">
+    <h4>Hello from a semantic card</h4>
+    <p>No dark: classes anywhere. The colors come from four CSS variables.</p>
+    <span class="btn">Primary button</span>
+    <div class="cls" id="cls">&lt;div class="stage"&gt;</div>
+  </div>
+</div>
+<p style="margin-top:34px">Hope this is useful. How do you handle dark mode in your projects?</p>
+</article>
+<div class="hire" id="hire">
+  <h3>Let's make<br>something fun.</h3>
+  <p>Freelance, contract, or full-time. Serious work, unserious energy.</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="pill" style="background:var(--g)" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp" target="_blank" rel="noopener">Toptal ↗</a>
+  </div>
+</div>
+<script>
+const dm=document.getElementById("dm"),st=document.getElementById("stage"),cls=document.getElementById("cls");
+dm.onchange=()=>{st.classList.toggle("dark",dm.checked);cls.textContent=dm.checked?'<div class="stage dark">':'<div class="stage">'};
+const pr=document.getElementById("prog");addEventListener("scroll",()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/(h.scrollHeight-innerHeight)*100)+"%"},{passive:true});
+</script>
+</body>
+</html>
