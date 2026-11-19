@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shane's Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff7e8;--ink:#121212;--y:#ffe14d;--p:#ff7ac6;--b:#4d7cff;--g:#3ddc84;--o:#ff6a3d;--v:#a98bff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;overflow-x:hidden}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;pointer-events:none}
+.top>*{pointer-events:auto}
+.pill{background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink);cursor:pointer;font-family:inherit;transition:transform .1s,box-shadow .1s}
+.pill:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.pill:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.ctrls{display:flex;gap:10px}
+#pit{position:relative;height:100vh;min-height:560px;overflow:hidden;border-bottom:4px solid var(--ink);background:
+ radial-gradient(circle,#12121214 1.5px,transparent 2px) 0 0/22px 22px}
+.hint{position:absolute;left:50%;top:22%;transform:translateX(-50%);text-align:center;pointer-events:none;width:min(680px,90vw)}
+.hint h2{font-family:"Archivo Black";font-size:clamp(18px,2.4vw,26px);line-height:1.2}
+.hint p{margin-top:10px;font-weight:600;color:#12121299}
+.body{position:absolute;left:0;top:0;will-change:transform;user-select:none;touch-action:none;cursor:grab;display:grid;place-items:center;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.body:active{cursor:grabbing}
+.letter{font-family:"Archivo Black";color:var(--ink);border-radius:22px;line-height:1}
+.skill{border-radius:999px;font-weight:800;padding:0 18px;white-space:nowrap;font-size:17px}
+.ball{border-radius:50%;font-size:30px}
+section{max-width:1100px;margin:0 auto;padding:90px 18px}
+h3.sec{font-family:"Archivo Black";font-size:clamp(40px,7vw,88px);line-height:.9;letter-spacing:-.03em;margin-bottom:36px}
+h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;display:inline-block;transform:rotate(-2deg)}
+.stickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px}
+.stk{background:#fff;border:4px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--ink);padding:14px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.2,1.6,.4,1);display:block}
+.stk:nth-child(odd){transform:rotate(-2deg)}.stk:nth-child(even){transform:rotate(2deg)}
+.stk:hover{transform:rotate(0) scale(1.05)}
+.stk .im{height:150px;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#f1f1f1}
+.stk img{width:100%;height:100%;object-fit:cover}
+.stk h4{font-family:"Archivo Black";font-size:24px;margin:12px 0 4px}
+.stk p{font-size:15px;line-height:1.4}
+.stk small{display:inline-block;margin-top:10px;font-weight:800;font-size:12px;background:var(--ink);color:#fff;padding:3px 9px;border-radius:999px}
+.tl{display:grid;gap:18px}
+.job{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:start;background:#fff;border:4px solid var(--ink);border-radius:20px;padding:20px;box-shadow:6px 6px 0 var(--ink)}
+.job .yr{font-family:"Archivo Black";font-size:18px;padding:6px 12px;border:3px solid var(--ink);border-radius:12px;text-align:center}
+.job h4{font-size:22px;font-weight:800}
+.job p{margin-top:6px;line-height:1.5}
+.marq{background:var(--ink);color:var(--y);font-family:"Archivo Black";font-size:clamp(28px,5vw,56px);white-space:nowrap;overflow:hidden;padding:16px 0;border-top:4px solid var(--ink)}
+.marq div{display:inline-block;animation:m 22s linear infinite}
+@keyframes m{to{transform:translateX(-50%)}}
+.hire{text-align:center;padding:110px 18px}
+.hire h3{font-family:"Archivo Black";font-size:clamp(44px,9vw,120px);line-height:.88;letter-spacing:-.04em}
+.hire .big{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:40px}
+.hire .big a{font-size:20px;padding:16px 26px}
+.posts{display:grid;gap:22px}
+.post{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:center;background:#fff;border:4px solid var(--ink);border-radius:20px;padding:16px;box-shadow:6px 6px 0 var(--ink);text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s}
+.post:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.post .im{height:130px;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#121212}
+.post img{width:100%;height:100%;object-fit:cover}
+.post h4{font-family:"Archivo Black";font-size:clamp(20px,2.4vw,26px);line-height:1.15}
+.post p{margin-top:8px;line-height:1.5}
+.post small{display:inline-block;margin-top:12px;font-weight:800;font-size:12px;background:var(--ink);color:#fff;padding:3px 9px;border-radius:999px}
+.tt{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+.tt>p{flex:1 1 280px;font-size:18px;line-height:1.5;font-weight:600}
+.badge{width:250px;background:#fff;border:4px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 #204ecf;padding:26px 20px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transform:rotate(-3deg);transition:transform .25s cubic-bezier(.2,1.6,.4,1)}
+.badge:hover{transform:rotate(0) scale(1.04)}
+.badge h4{font-family:"Archivo Black";font-size:24px;line-height:1;color:#204ecf}
+.badge .rule{width:100%;height:4px;background:var(--ink);border-radius:2px}
+.badge .vet{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:-4px}
+.badge .pill{background:#204ecf;color:#fff;margin-top:6px;font-size:16px}
+@media(max-width:640px){.job{grid-template-columns:1fr}.skill{font-size:14px}.post{grid-template-columns:1fr}}
+</style>
+<meta property="og:title" content="Seven Futures" />
+<meta property="og:description" content="A creative portfolio showcasing seven distinct interactive themes and prototypes for a software engineer and indie hacker." />
+<meta property="og:url" content="https://jovial-sequin-56cd.here.now/play/" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://here.now/og/jovial-sequin-56cd.jpg" />
+<meta property="og:image:width" content="1280" />
+<meta property="og:image:height" content="720" />
+<meta name="twitter:image" content="https://here.now/og/jovial-sequin-56cd.jpg" />
+<meta name="twitter:card" content="summary_large_image" /></head>
+<body>
+<div class="top">
+  <a class="pill" href="../">← concepts</a>
+  <div class="ctrls"><button class="pill" id="shake">🫨 shake</button><button class="pill" id="flip">🙃 gravity</button></div>
+</div>
+
+<div id="pit">
+  <div class="hint"><h2>Hi, I'm Kittichote "Shane" Kamalapirat. I build web &amp; mobile apps, ship indie products, and apparently made my skills throwable.</h2><p>Grab anything. Throw it. Scroll down when you're done playing.</p></div>
+</div>
+
+<div class="marq"><div>INDIE HACKER ✦ SOFTWARE ENGINEER ✦ REACT ✦ REACT NATIVE ✦ AI ✦ MANGA ENJOYER ✦ INDIE HACKER ✦ SOFTWARE ENGINEER ✦ REACT ✦ REACT NATIVE ✦ AI ✦ MANGA ENJOYER ✦&nbsp;</div></div>
+
+<section>
+  <h3 class="sec">Things I <span>made</span></h3>
+  <div class="stickers" id="stk"></div>
+</section>
+
+<section style="padding-top:20px">
+  <h3 class="sec">Places I've <span style="background:var(--p)">been</span></h3>
+  <div class="tl">
+    <div class="job"><div class="yr" style="background:var(--g)">NOW</div><div><h4>Indie hacker</h4><p>Building and shipping my own products. Jouzu Speak is the flagship.</p></div></div>
+    <div class="job"><div class="yr" style="background:var(--y)">2022 →</div><div><h4>Software Engineer @ Earnin</h4><p>Financial web app for 10,000+ users a month. Worked on the design system. React, TypeScript, Tailwind, Playwright.</p></div></div>
+    <div class="job"><div class="yr" style="background:var(--b);color:#fff">2022 →</div><div><h4>Freelance Engineer @ Toptal</h4><p>MVPs for a hair-salon marketplace and an audio language-learning app. React, React Native, NestJS, Docker.</p></div></div>
+    <div class="job"><div class="yr" style="background:var(--p)">2022</div><div><h4>Senior React Dev @ Grounded Packaging</h4><p>Internal app that fully automated product quotes. Next.js, GraphQL, Rails.</p></div></div>
+    <div class="job"><div class="yr" style="background:var(--v)">2020–22</div><div><h4>Contract Engineer @ F Style</h4><p>Modernised the company landing page.</p></div></div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <h3 class="sec">Things I <span style="background:var(--g)">wrote</span></h3>
+  <div class="posts">
+    <a class="post" href="https://dev.to/kittishane/the-cleanest-way-to-support-dark-mode-using-css-variables-and-tailwind-4po0" target="_blank" rel="noopener"><div class="im"><img src="../assets/blog-dark-mode.webp" alt="Dark mode with CSS variables and Tailwind"></div><div><h4>The cleanest way to support dark mode using CSS variables and Tailwind ↗</h4><p>My write-up on handling light and dark themes with CSS variables and Tailwind, without sprinkling dark: classes everywhere.</p><small>dev.to · CSS · Tailwind</small></div></a>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <h3 class="sec">Top <span style="background:var(--b);color:#fff">3%</span></h3>
+  <div class="tt">
+    <!-- Toptal "Top 3% Talent" badge, restyled. Keep the Hire me link (incl. #NVDEJp) unchanged: it is what Toptal's badge check looks for. -->
+    <div class="badge">
+      <svg width="72" viewBox="0 0 60 17" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m20.85 6.38 6.06-.89 2.72-5.49 2.71 5.49 6.06.89-4.39 4.28 1.04 6.03-5.42-2.85-5.43 2.85 1.04-6.03zm33.06 7.17 1.85-.27.82-1.67.83 1.67 1.84.27-1.33 1.31.31 1.83-1.65-.87-1.66.87.32-1.83zm-3.38-3.01-3.61-.52-1.61-3.26-1.62 3.26-3.6.52 2.6 2.55-.61 3.59 3.23-1.69 3.21 1.69-.61-3.59zm-45.19 3.01-1.85-.27-.82-1.67-.83 1.67-1.84.27 1.33 1.31-.31 1.83 1.65-.87 1.65.87-.31-1.83zm3.38-3.01 3.61-.52 1.61-3.26 1.61 3.26 3.61.52-2.6 2.55.61 3.59-3.23-1.69-3.22 1.69.62-3.59z" fill="#00c3ff" stroke="#121212" stroke-width=".6"/></svg>
+      <h4>TOP 3% TALENT</h4>
+      <div class="rule"></div>
+      <span class="vet">Vetted by</span>
+      <svg style="width:110px" viewBox="0 0 108 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Toptal"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.11 0L14.82 6.7C14.87 6.75 14.91 6.8 14.97 6.85L20.82 12.7L11.31 22.16L15.66 26.52L12.75 29.41L6.09 22.75C6.01 22.68 5.93 22.6 5.85 22.52L0 16.68L9.48 7.25L5.16 2.94L8.11 0ZM12.36 10.5C12.27 10.48 12.18 10.48 12.1 10.5C12.01 10.53 11.94 10.57 11.78 10.72L6.37 16.11C6.21 16.27 6.17 16.34 6.15 16.42C6.12 16.51 6.12 16.6 6.15 16.68C6.17 16.77 6.22 16.85 6.37 17L8.09 18.72C8.24 18.87 8.31 18.91 8.4 18.94C8.49 18.96 8.57 18.96 8.66 18.94C8.75 18.91 8.82 18.87 8.97 18.72L14.38 13.33C14.54 13.18 14.58 13.1 14.61 13.02C14.63 12.93 14.63 12.85 14.61 12.76C14.59 12.67 14.54 12.6 14.39 12.45L12.67 10.73C12.52 10.57 12.44 10.53 12.36 10.5Z" fill="#204ecf"/><path fill-rule="evenodd" clip-rule="evenodd" d="M62.65 7.76C64.76 7.76 66.56 8.58 67.99 10.16C69.45 11.69 70.18 13.8 70.17 16.42C70.17 18.98 69.42 21.22 67.93 22.8C66.46 24.37 64.59 25.17 62.35 25.17C60.42 25.16 58.67 24.47 57.51 23.28L57.35 23.11L57.34 29.86L53.52 29.85V29.57L53.56 7.96L57.36 7.96L57.35 10.6C58.6 9.19 60.61 7.76 62.65 7.76ZM87.1 7.82C89.28 7.82 90.78 8.31 91.94 9.26C93.05 10.18 93.64 11.82 93.69 13.55L93.69 13.81L93.67 24.95H89.8L89.8 24.49C89.8 24.01 89.8 23.52 89.8 23.02C88.68 24.57 87.12 25.32 85.04 25.32C83.39 25.32 81.99 24.82 80.97 23.9C79.94 22.95 79.39 21.66 79.39 20.16C79.41 17.33 81.41 15.37 84.91 14.76L85.18 14.71L89.82 13.98V13.61C89.82 12.83 89.59 11.89 89.13 11.5C88.66 11.1 88.09 10.77 87.1 10.77C84.37 10.77 83.81 12.78 83.78 13.79L83.78 13.88L80.36 13.92C80.36 12.43 81.05 10.5 82.44 9.29C83.56 8.32 85.19 7.87 86.77 7.82L87.07 7.82H87.1ZM72.12 3.46L75.93 3.46L75.92 8.02L79.45 8.02L79.45 11.2L75.91 11.19L75.9 19.73C75.9 20.67 76.09 21.29 76.5 21.58C76.93 21.88 77.8 21.6 77.8 21.6L78.14 24.92C78.14 24.92 76.94 25.23 76.18 25.23C75.19 25.23 74.34 24.98 73.69 24.48C72.63 23.68 72.09 22.28 72.09 20.31L72.11 11.19L68.92 8L72.12 8.01L72.12 3.46ZM49.66 10.26C50.76 11.39 52.07 13.4 52.06 16.52C52.05 19.63 50.74 21.63 49.65 22.76C48.15 24.3 46.11 25.18 44.06 25.18C43.98 25.18 43.9 25.18 43.81 25.17C41.62 25.16 39.68 24.38 38.06 22.84C36.43 21.29 35.6 19.16 35.6 16.48C35.6 13.8 36.44 11.66 38.07 10.12C39.69 8.59 41.62 7.82 43.82 7.82C45.99 7.75 48.11 8.65 49.66 10.26ZM40.85 3.22V6.99L33.49 7L33.51 24.97L29.54 24.96V24.62L29.57 6.99H22.06L22.07 3.22H40.85ZM95.53 3.47L98.95 3.48V3.57L98.92 24.95L95.5 24.94V24.84L95.53 3.47ZM89.82 17.05L86.01 17.69C84.15 18.01 83.29 18.73 83.28 19.99C83.27 21.14 84.09 21.91 85.37 21.98L85.53 21.98H85.55C87.99 21.98 89.72 20.08 89.81 17.31L89.82 17.09V17.05ZM43.8 11.21C42.52 11.21 41.41 11.7 40.51 12.68C39.63 13.64 39.18 14.92 39.18 16.49C39.18 18.07 39.63 19.35 40.51 20.31C41.4 21.29 42.51 21.78 43.79 21.79C45.09 21.79 46.21 21.3 47.1 20.32C48 19.34 48.45 18.06 48.46 16.51C48.47 14.95 48.01 13.67 47.11 12.69C46.21 11.71 45.1 11.21 43.8 11.21ZM61.74 11.33H61.72C60.44 11.33 59.38 11.79 58.48 12.76C57.58 13.7 57.13 14.92 57.12 16.39C57.12 17.88 57.57 19.22 58.47 20.2C59.39 21.14 60.45 21.61 61.72 21.61C63.01 21.61 64.1 21.13 64.97 20.2C65.88 19.23 66.32 17.9 66.33 16.41C66.33 14.93 65.87 13.71 64.99 12.78C64.12 11.82 63.03 11.33 61.74 11.33Z" fill="#262d3d"/></svg>
+      <a class="pill" target="_blank" rel="noopener noreferrer" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp">Hire me</a>
+    </div>
+    <p>I'm in Toptal's network of freelance engineers, which they say is the top 3% of applicants. If you want to hire me through them, the badge takes you to my Toptal profile.</p>
+  </div>
+</section>
+
+<div class="hire" style="background:var(--y);border-top:4px solid var(--ink)">
+  <h3>Let's make<br>something fun.</h3>
+  <p style="font-weight:600;margin-top:18px;font-size:18px">Freelance, contract, or full-time. Serious work, unserious energy.</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="pill" style="background:var(--g)" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp" target="_blank" rel="noopener">Toptal ↗</a>
+    <a class="pill" href="https://github.com/KittichoteKamalapirat/resume/blob/726a944875fe1ef9b4bbd5cdcef32c29688796ea/Dec%202023.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+  </div>
+</div>
+
+<script src="../assets/matter.min.js"></script>
+<script>
+const P=[
+ {t:"Jouzu Speak",d:"Personal AI tutor for conversational Japanese.",img:"../assets/jouzu.webp",u:"https://www.jouzuspeak.com/",tag:"AI · Python · GCP"},
+ {t:"Smartbanner",d:"React package for custom smart app banners.",img:"../assets/smartbanner.svg",u:"https://www.npmjs.com/package/custom-react-smartbanner",tag:"npm · React"},
+ {t:"Shareculator",d:"Split party expenses without the drama.",img:"../assets/shareculator.webp",u:"https://www.shareculator.com/",tag:"React · Tailwind"},
+ {t:"Wedding RSVP",d:"Invitation site with RSVP and guest list.",img:"../assets/wedding.webp",u:"https://www.dev.parkandrotela.com/",tag:"Sheets · Maps · i18n"},
+];
+document.getElementById("stk").innerHTML=P.map(p=>`<a class="stk" href="${p.u}" target="_blank" rel="noopener"><div class="im"><img src="${p.img}" alt="${p.t}"></div><h4>${p.t} ↗</h4><p>${p.d}</p><small>${p.tag}</small></a>`).join("");
+
+const {Engine,Bodies,Body,Composite,Constraint,Runner}=Matter;
+const pit=document.getElementById("pit");
+const engine=Engine.create();engine.gravity.y=1;
+let W=pit.clientWidth,H=pit.clientHeight;
+const walls=[];
+function buildWalls(){walls.forEach(w=>Composite.remove(engine.world,w));walls.length=0;const t=200;
+ walls.push(Bodies.rectangle(W/2,H+t/2,W*3,t,{isStatic:true}),Bodies.rectangle(W/2,-t/2-400,W*3,t,{isStatic:true}),Bodies.rectangle(-t/2,H/2,t,H*4,{isStatic:true}),Bodies.rectangle(W+t/2,H/2,t,H*4,{isStatic:true}));
+ Composite.add(engine.world,walls)}
+buildWalls();
+const colors=["--y","--p","--b","--g","--o","--v"].map(v=>getComputedStyle(document.documentElement).getPropertyValue(v));
+const items=[];const mobile=W<640;
+function add(el,body){pit.appendChild(el);items.push({el,body});Composite.add(engine.world,body)}
+const L=mobile?Math.min(64,W/6.2):Math.min(140,W/8);
+"SHANE".split("").forEach((ch,i)=>{const el=document.createElement("div");el.className="body letter";el.textContent=ch;
+ el.style.cssText+=`width:${L}px;height:${L}px;font-size:${L*.72}px;background:${colors[i%6]}`;
+ add(el,Bodies.rectangle(W/2-(2.5*L*1.1)+i*L*1.1+L/2,-100-i*80,L,L,{chamfer:{radius:18},restitution:.4,friction:.3,angle:(Math.random()-.5)*.6}))});
+const skills=["TypeScript","React","React Native","Next.js","Python","Tailwind","Postgres","GraphQL","Docker","OpenAI","GCP","Playwright","Design Systems","Ships fast","Manga reader"];
+skills.forEach((s,i)=>{const el=document.createElement("div");el.className="body skill";el.textContent=s;el.style.background=i%3===0?"#fff":colors[(i+2)%6];
+ pit.appendChild(el);const w=el.offsetWidth+8,h=mobile?42:50;el.style.width=w+"px";el.style.height=h+"px";pit.removeChild(el);
+ add(el,Bodies.rectangle(80+Math.random()*(W-160),-150-i*45,w,h,{chamfer:{radius:h/2},restitution:.5,friction:.2,angle:Math.random()*2}))});
+["☕","📚","🚀","⚡"].forEach((e,i)=>{const r=mobile?26:36;const el=document.createElement("div");el.className="body ball";el.textContent=e;el.style.cssText+=`width:${r*2}px;height:${r*2}px;background:#fff`;
+ add(el,Bodies.circle(100+Math.random()*(W-200),-900-i*100,r,{restitution:.85,friction:.05}))});
+
+// drag
+let drag=null;
+pit.addEventListener("pointerdown",e=>{const el=e.target.closest(".body");if(!el)return;const it=items.find(i=>i.el===el);const r=pit.getBoundingClientRect();
+ const pt={x:e.clientX-r.left,y:e.clientY-r.top};const b=it.body;
+ const off={x:pt.x-b.position.x,y:pt.y-b.position.y};const c=Math.cos(-b.angle),s=Math.sin(-b.angle);
+ const c1=Constraint.create({pointA:pt,bodyB:b,pointB:{x:off.x*c-off.y*s,y:off.x*s+off.y*c},stiffness:.12,damping:.08,length:0});
+ Composite.add(engine.world,c1);drag={c:c1,id:e.pointerId};el.setPointerCapture(e.pointerId)});
+pit.addEventListener("pointermove",e=>{if(!drag)return;const r=pit.getBoundingClientRect();drag.c.pointA={x:e.clientX-r.left,y:e.clientY-r.top}});
+const end=()=>{if(drag){Composite.remove(engine.world,drag.c);drag=null}};
+pit.addEventListener("pointerup",end);pit.addEventListener("pointercancel",end);
+
+document.getElementById("shake").onclick=()=>items.forEach(({body})=>Body.setVelocity(body,{x:(Math.random()-.5)*40,y:-15-Math.random()*25}));
+document.getElementById("flip").onclick=()=>{engine.gravity.y*=-1;items.forEach(({body})=>Body.setVelocity(body,{x:body.velocity.x,y:body.velocity.y-2*engine.gravity.y}))};
+addEventListener("resize",()=>{W=pit.clientWidth;H=pit.clientHeight;buildWalls()});
+
+const runner=Runner.create();Runner.run(runner,engine);
+(function loop(){items.forEach(({el,body})=>{const w=el.offsetWidth,h=el.offsetHeight;el.style.transform=`translate(${body.position.x-w/2}px,${body.position.y-h/2}px) rotate(${body.angle}rad)`});requestAnimationFrame(loop)})();
+// mouse-move nudge: things jiggle when the cursor zooms past
+let last=null;pit.addEventListener("mousemove",e=>{if(drag)return;const r=pit.getBoundingClientRect(),pt={x:e.clientX-r.left,y:e.clientY-r.top};
+ if(last){const vx=pt.x-last.x,vy=pt.y-last.y;if(Math.hypot(vx,vy)>18)items.forEach(({body})=>{const d=Math.hypot(body.position.x-pt.x,body.position.y-pt.y);if(d<90)Body.applyForce(body,body.position,{x:vx*.0004*body.mass,y:vy*.0004*body.mass})})}last=pt});
+</script>
+</body>
+</html>
