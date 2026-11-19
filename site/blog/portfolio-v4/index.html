@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Portfolio v4: seven prototypes, one playground · Shane</title>
+<meta name="description" content="How I rebuilt my portfolio in two weeks with AI agents: what I tried, what I kept, and what I cut.">
+<meta property="og:title" content="Portfolio v4: seven prototypes, one playground" />
+<meta property="og:description" content="How I rebuilt my portfolio in two weeks with AI agents: what I tried, what I kept, and what I cut." />
+<meta property="og:image" content="https://kittichotekamalapirat.github.io/blog/images/portfolio-v4/hero.webp" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../post.css">
+<style>
+.concepts{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin:40px 0}
+.concepts a{text-decoration:none;color:var(--ink);display:block}
+.concepts .im{border:4px solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);overflow:hidden;background:#fff;aspect-ratio:16/10}
+.concepts .im img{width:100%;height:100%;object-fit:cover;object-position:top}
+.concepts b{display:block;font-family:"Archivo Black";font-size:18px;margin:14px 0 2px}
+.concepts small{display:block;font-size:14px;line-height:1.4;font-weight:600}
+.concepts .win .im{box-shadow:5px 5px 0 var(--p)}
+.concepts .win b::after{content:"picked";margin-left:8px;font:800 11px "Archivo";text-transform:uppercase;letter-spacing:.06em;background:var(--p);border:2px solid var(--ink);border-radius:999px;padding:2px 8px;vertical-align:3px}
+.vers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0}
+.ver{border:4px solid var(--ink);border-radius:16px;padding:12px;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+.ver b{font-family:"Archivo Black";font-size:26px;display:block;line-height:1}
+.ver small{display:block;font-size:13px;line-height:1.35;font-weight:600;margin-top:6px}
+.ver.now{background:var(--y)}
+@media(max-width:640px){.concepts{grid-template-columns:1fr}.vers{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="top">
+  <a class="pill" href="../../#writing">← back to Shane</a>
+</div>
+<header class="hd"><div class="in">
+  <span class="tag-t case">Case study</span><span class="meta">8 min read</span><br>
+  <h1>Portfolio v4: seven prototypes, <span>one playground</span></h1>
+  <p class="lede">How I rebuilt my portfolio in two weeks with AI agents: what I tried, what I kept, and what I cut.</p>
+  <p class="by">Kittichote "Shane" Kamalapirat · November 2026</p>
+</div></header>
+<article>
+<div class="facts">
+<div class="fact" style="background:var(--y)"><small>What</small><b>A full redesign of my portfolio</b></div>
+<div class="fact" style="background:var(--g)"><small>When</small><b>7 to 19 November 2026</b></div>
+<div class="fact" style="background:var(--p)"><small>Built with</small><b>Plain HTML, CSS and JS, plus AI coding agents</b></div>
+<div class="fact" style="background:var(--v)"><small>Runs on</small><b>GitHub Pages, one Vercel function, Resend</b></div>
+</div>
+<figure><div class="im"><img src="../images/portfolio-v4/hero.webp" alt="The new portfolio homepage: Hi, I'm Shane, with an illustration of Shane holding a laptop in a blue dotted card"></div><figcaption>The new homepage. Hover the illustration and the office shirt turns into WFH mode.</figcaption></figure>
+
+<h2>Why <span>again?</span></h2>
+<p>I work for myself now, building my own apps. That could change: one day I might look for a job again, or take on freelance clients. When that day comes, my portfolio has to do its job on the first visit, so I wanted it up to date and professional, but also something people remember.</p>
+<p>The old site was v3, which I built in Next.js over a month around New Year 2024. Its layout was heavily inspired by Brittany Chiang's portfolio. It still listed jobs I'd left as "Present", it didn't mention a single app I'd shipped since, and it looked like a lot of other developer portfolios.</p>
+<div class="vers">
+<div class="ver"><b>v1</b><small>My first portfolio</small></div>
+<div class="ver"><b>v2</b><small>The second try</small></div>
+<div class="ver"><b>v3</b><small>Next.js, Tailwind, dark mode, 2023/24</small></div>
+<div class="ver now"><b>v4</b><small>This one, November 2026</small></div>
+</div>
+
+<h2>Step 1: <span style="background:var(--g)">fix what's there</span></h2>
+<p>v4 started small. Before redesigning anything, I moved v3 from Vercel to <strong>GitHub Pages</strong> as a static export, with a GitHub Actions workflow that builds and deploys on every push to <code>main</code>. Along the way I found that the theme toggle only worked for visitors whose phone was already in dark mode. The colour tokens were only defined for that case. I fixed that, cleaned up an animation loop that never stopped, and added labels for screen readers.</p>
+<p>Then I shipped one thing before any redesign: Toptal's <strong>"Top 3% talent"</strong> badge. While I was deciding on a design, the most useful thing for getting hired was a trust signal someone else gives me, so it went live first. That's also when I found the site was deploying from a different repo than the one I thought. That's worth checking before you change anything.</p>
+
+<h2>Step 2: <span style="background:var(--p)">go wide</span></h2>
+<p>My brief to the AI was one line: <em>"Be super creative. Make me impressed."</em> Instead of one redesign, I got working prototypes, built with my real jobs, projects and screenshots, and each one labelled with who it's best for. Over a few sessions there were seven:</p>
+<div class="concepts">
+<a href="https://jovial-sequin-56cd.here.now/os/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/os.webp" alt="ShaneOS, a retro desktop with windows and a terminal" loading="lazy"></div><b>ShaneOS</b><small>A retro desktop with draggable windows and a working terminal. Try <code>sudo hire-me</code>.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/manga/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/manga.webp" alt="The Shane Chronicles, my career as manga panels" loading="lazy"></div><b>The Shane Chronicles</b><small>My career as a manga volume, with a status screen and a training arc for each job.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/launch/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/launch.webp" alt="Shane 4.0, a keynote-style launch page" loading="lazy"></div><b>Shane 4.0</b><small>A product keynote where I'm the product, with three ways to hire me. The most professional of the set.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/metro/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/metro.webp" alt="Shane Line, a Tokyo-style transit map" loading="lazy"></div><b>Shane Line</b><small>A Tokyo subway map. Jobs and projects are stations, and the "Hire Line" is under construction.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/quest/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/quest.webp" alt="Shane Online, a side-scrolling game world" loading="lazy"></div><b>Shane Online</b><small>A side-scrolling game: climb my career, open project chests, bonk bugs. Plus a "Not a gamer?" button.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/editorial/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/editorial.webp" alt="Four Moods, an editorial layout with a theme switcher" loading="lazy"></div><b>Four Moods</b><small>An editorial layout that switches between Paper, Tokyo Night, Ink and Matcha.</small></a>
+<a class="win" href="../../" ><div class="im"><img src="../images/portfolio-v4/hero-wfh.webp" alt="The Playground concept, which became the final site" loading="lazy"></div><b>Playground</b><small>Neo-brutalist and loud. It started with my name and skills as physics blocks you could throw around.</small></a>
+<a href="https://jovial-sequin-56cd.here.now/" target="_blank" rel="noopener"><div class="im"><img src="../images/portfolio-v4/hub.webp" alt="The concepts hub page" loading="lazy"></div><b>All seven</b><small>The hub where every concept is still live.</small></a>
+</div>
+<p>Working prototypes beat mockups. I could open each one on my phone, click around, and feel which one I'd actually send to a recruiter. They also exposed my stale content, because every concept used my real data.</p>
+<div class="box"><strong>A side quest about game art.</strong> I wanted Shane Online to use real MapleStory sprites "just for the idea". The AI declined to put Nexon's art on a public page, since a portfolio is there to win work. It built a sprite-swap system instead: all the art loads from one folder and a config file, so I can try any sprites locally without publishing them. I kept the fun and avoided an IP problem.</div>
+
+<h2>Step 3: <span style="background:var(--b);color:#fff">make it hireable</span></h2>
+<p>I picked <strong>Playground</strong>. Then most of what made it a toy had to go. The throwable physics name, the skill blocks, the shake and gravity buttons and the scrolling banner were fun for ten seconds, and they got in the way of the question a visitor came with: <em>who is this, and can he do the job?</em></p>
+<p>The hero got the most rewrites. I wrote three positioning variations and picked the one aimed at employers: <strong>frontend engineer first, full stack on my own apps</strong>. The tagline became "I build products people actually use.", followed by one paragraph with the facts: 6+ years of React, Next.js and TypeScript, a web app at EarnIn that reached 1M+ users, and apps I've built from the database to the App Store. My illustration sits in a blue dotted card. Hover it and the office shirt swaps to a tank top with a "WFH mode" label.</p>
+<figure><div class="im"><img src="../images/portfolio-v4/skills.webp" alt="Stuff I'm good at: a grid of 16 tech logos in white tiles" loading="lazy"></div><figcaption>16 logos that fly in, hop around and magnify like the macOS dock. I swapped Rails and AWS for Claude, Swift and Node.js.</figcaption></figure>
+<p><strong>Things I made</strong> is grouped instead of flat. My iOS apps sit under an "Acorn Studio" label and link to the App Store. I didn't give Acorn its own card, because that would list the same apps twice. Open source comes next: a contribution to the Ardia browser and my React SmartBanner package.</p>
+<figure><div class="im"><img src="../images/portfolio-v4/made.webp" alt="Things I made: app cards grouped under Acorn Studio, then open source" loading="lazy"></div></figure>
+<p><strong>My journey</strong> is my favourite part. A road draws itself as you scroll, does one loop-the-loop, and my face rides along it from my 2017 internship to now. Each year label takes the colour of that company's logo: Toptal blue, EarnIn yellow, Zendai orange.</p>
+<figure><div class="im"><img src="../images/portfolio-v4/journey.webp" alt="My journey: a winding road with job stops and Shane's face as the marker" loading="lazy"></div></figure>
+<p>The blog posts now live on the site instead of dev.to, and the Toptal badge became a card you can click anywhere on.</p>
+
+<h2>Three <span>languages</span></h2>
+<p>I'm Thai, I started my career at a company in Japan, and most tech work happens in English. So the site comes in English, Thai and Japanese, switched from the top corner with a flag and a short label written in the current language. My name changes too: กิตติโชติ กมลาภิรัตน์ in Thai and キッティチョート・カマラピラット in Japanese.</p>
+<div class="phones"><div class="ph"><div class="im"><img src="../images/portfolio-v4/phone-en.webp" alt="The homepage in English on a phone" loading="lazy"></div><b>English</b></div><div class="ph"><div class="im"><img src="../images/portfolio-v4/phone-th.webp" alt="The homepage in Thai on a phone" loading="lazy"></div><b>ไทย</b></div><div class="ph"><div class="im"><img src="../images/portfolio-v4/phone-ja.webp" alt="The homepage in Japanese on a phone" loading="lazy"></div><b>日本語</b></div></div>
+<p>The first Thai and Japanese drafts were literal translations of my playful English, and they read badly. A joke that works in English sounds odd in Thai. The rule now: <mark>English stays as I wrote it, and Thai and Japanese use plain, professional website wording</mark>, not a line-by-line translation. Blog posts stay in English.</p>
+
+<h2>A contact form <span style="background:var(--o)">on a static site</span></h2>
+<p>GitHub Pages only serves files, so the form needed a small backend. It posts to one serverless function on Vercel, and the function sends me the message through Resend. Replying to that email goes straight to the visitor.</p>
+<figure><div class="im"><img src="../images/portfolio-v4/hire.webp" alt="The contact section: name, email, subject and message fields on yellow" loading="lazy"></div></figure>
+<div class="rules">
+<div class="rule" style="background:var(--y)"><b>Keep bots out</b><p>Only my own site may call the function. A hidden field catches bots, and every field has a length limit.</p></div>
+<div class="rule" style="background:var(--g)"><b>Tell people it worked</b><p>The visitor gets a short confirmation email in the language they used on the site.</p></div>
+<div class="rule" style="background:var(--p)"><b>Don't become a spam tool</b><p>The confirmation never repeats the message, so nobody can use my form to email other people.</p></div>
+<div class="rule" style="background:var(--v)"><b>Free to run</b><p>Resend's free plan covers 3,000 emails a month, and each message uses two.</p></div>
+</div>
+
+<h2>Shipping <span style="background:var(--g)">it</span></h2>
+<p>The new site replaced the Next.js version on the homepage. Since it's plain HTML, CSS and JavaScript, there's nothing to build: the GitHub Actions workflow now uploads one folder to GitHub Pages. The old Next.js code is still in the repo. After that came the small things you only notice once a site is live: a footer, a vector version of my face for the journey road, and a résumé icon whose lines disappeared on the dark footer.</p>
+<figure><div class="im"><img src="../images/portfolio-v4/footer.webp" alt="The dark footer with name, links, language switcher and copyright" loading="lazy"></div></figure>
+
+<h2>How I worked <span>with AI</span></h2>
+<p>I ran the project in Claude: one chat where I dropped requests, and a separate thread for each piece of work, each with a visible checklist. A shared project memory kept the rules I'd set, like how the Thai copy should sound or which Toptal link must never change, so I didn't have to repeat them. Every change went to a preview link first and then to GitHub Pages through a pull request. Most of my feedback was a screenshot and one sentence.</p>
+<p>Not everything went smoothly. I accidentally built the site in two separate projects, which is why this post stitches together two histories. One preview went up without my account key and needed claiming. And AI-written Thai still needs a human ear.</p>
+
+<h2>What I <span style="background:var(--p)">learned</span></h2>
+<ol class="steps">
+<li><b>Go wide before going deep.</b> With AI, working prototypes are cheap to make, and choosing between real things is much easier than imagining them.</li>
+<li><b>Fun is the hook, not the content.</b> The playful parts that stayed are the ones that don't block the facts: a hover swap, a road you scroll, a face that rides it.</li>
+<li><b>Ship the trust signals first.</b> The Toptal badge was live while the design was still undecided.</li>
+<li><b>Don't translate, localize.</b> Each language gets copy that sounds normal in that language.</li>
+<li><b>A static site can still talk back.</b> One small function and a free email plan were enough for a real contact form.</li>
+</ol>
+
+<h2>What's <span style="background:var(--g)">next</span></h2>
+<p>Form emails will come from my studio domain, theacorn.studio. The game, the manga and the other concepts stay online for anyone who likes them. And the site will keep changing, because a portfolio you never update is one you've given up on.</p>
+<p><a href="../../">See the site →</a></p>
+</article>
+<div class="hire">
+  <h3>Let's work<br>together.</h3>
+  <p>Freelance, contract, or full-time.</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="../../#hire">Send me a message</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="pill" style="background:var(--g)" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp" target="_blank" rel="noopener">Toptal ↗</a>
+  </div>
+</div>
+<script>const pr=document.getElementById("prog");addEventListener("scroll",()=>{const h=document.documentElement;pr.style.width=(h.scrollTop/Math.max(1,h.scrollHeight-innerHeight)*100)+"%"},{passive:true});</script>
+</body>
+</html>
