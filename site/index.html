@@ -10,7 +10,7 @@
 :root{--bg:#fff7e8;--ink:#121212;--y:#ffe14d;--p:#ff7ac6;--b:#4d7cff;--g:#3ddc84;--o:#ff6a3d;--v:#a98bff}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:"Archivo",var(--xf),system-ui,sans-serif;overflow-x:hidden}
-.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;pointer-events:none}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:flex-end;align-items:center;padding:14px 18px;pointer-events:none}
 .top>*{pointer-events:auto}
 .big .pill{display:inline-flex;align-items:center;gap:10px}.big .ic{width:1.05em;height:1.05em;flex:none}.ic-w{display:contents}
 :root{--xf:sans-serif}html[lang=th]{--xf:"Noto Sans Thai"}html[lang=ja]{--xf:"Noto Sans JP"}
@@ -72,7 +72,7 @@ html[lang=ja] body{line-break:strict;word-break:normal}html[lang=ja] .lede,html[
 .road .track{fill:none;stroke:var(--ink);stroke-width:4;stroke-dasharray:2 14;stroke-linecap:round;opacity:.35}
 .road .edge{fill:none;stroke:var(--ink);stroke-width:14;stroke-linecap:round}
 .road .fill{fill:none;stroke:var(--y);stroke-width:6;stroke-linecap:round}
-.jr .head{position:absolute;left:0;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;border:4px solid var(--ink);border-radius:50%;background:#fff url(../assets/me-head.webp) center/cover;box-shadow:4px 4px 0 var(--ink);z-index:3;pointer-events:none}
+.jr .head{position:absolute;left:0;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;border:4px solid var(--ink);border-radius:50%;background:#fff url(assets/me-head.webp) center/cover;box-shadow:4px 4px 0 var(--ink);z-index:3;pointer-events:none}
 .jr .dot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:4px solid var(--ink);border-radius:50%;background:#fff;z-index:2;transform:scale(.4);transition:transform .4s cubic-bezier(.3,1.8,.5,1),background .2s}
 .jr .dot.in{transform:scale(1)}
 .stop{position:relative;width:calc(50% - 90px);background:#fff;border:4px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--ink);padding:22px 22px 20px;margin-bottom:-40px;z-index:1;opacity:0;transform:translateY(46px) rotate(var(--r0)) scale(.92);transition:opacity .35s,transform .6s cubic-bezier(.25,1.6,.45,1)}
@@ -152,7 +152,7 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
 </style>
 <meta property="og:title" content="Seven Futures" />
 <meta property="og:description" content="A creative portfolio showcasing seven distinct interactive themes and prototypes for a software engineer and indie hacker." />
-<meta property="og:url" content="https://kittichotekamalapirat.github.io/play/" />
+<meta property="og:url" content="https://kittichotekamalapirat.github.io/" />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://kittichotekamalapirat.github.io/assets/me-office.webp" />
 <meta property="og:image:width" content="1280" />
@@ -161,7 +161,6 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
 <meta name="twitter:card" content="summary_large_image" /></head>
 <body>
 <div class="top">
-  <a class="pill" href="../" data-i="back">← concepts</a>
   <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en"></button><button type="button" data-l="th"></button><button type="button" data-l="ja"></button></div>
 </div>
 
@@ -177,8 +176,8 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
   </div>
   <div class="portrait"><div class="pcard" aria-hidden="true"></div><div class="pclip">
   <div class="me" id="me" role="img" aria-label="Illustration of Shane holding a laptop. Hover to see the work-from-home version.">
-    <img class="office" src="../assets/me-office.webp" alt="" width="640" height="960">
-    <img class="wfh" src="../assets/me-wfh.webp" alt="" width="640" height="960">
+    <img class="office" src="assets/me-office.webp" alt="" width="640" height="960">
+    <img class="wfh" src="assets/me-wfh.webp" alt="" width="640" height="960">
     <span class="tag tag-hi" data-i="hi">Hi.</span>
     <span class="tag tag-wfh" data-i="wfh">WFH mode</span>
   </div>
@@ -192,7 +191,7 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
 
 <section id="made">
   <h3 class="sec" data-i="s_made">Things I <span>made</span></h3>
-  <div class="grp"><a href="https://www.theacorn.studio/" target="_blank" rel="noopener"><img src="../assets/apps/acorn.svg" alt=""><span data-i="acorn">Shipped under Acorn Studio ↗</span></a></div>
+  <div class="grp"><a href="https://www.theacorn.studio/" target="_blank" rel="noopener"><img src="assets/apps/acorn.svg" alt=""><span data-i="acorn">Shipped under Acorn Studio ↗</span></a></div>
   <div class="stickers" id="stk"></div>
   <div class="grp"><span data-i="oss">Open source</span></div>
   <div class="stickers" id="oss"></div>
@@ -218,7 +217,7 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
       <div><span class="ptag essay" data-i="tag_essay">Essay</span><h4 data-i="p2t">Small problems, every day</h4><p data-i="p2d">Why I built a meal planner when there are already a hundred of them.</p><small data-i="p2m">Nov 2026 · 4 min read</small></div>
     </a>
     <a class="post" href="blog/dark-mode/">
-      <div class="im"><img src="../assets/blog-dark-mode.webp" alt="Dark mode with CSS variables and Tailwind"></div>
+      <div class="im"><img src="assets/blog-dark-mode.webp" alt="Dark mode with CSS variables and Tailwind"></div>
       <div><span class="ptag tutorial" data-i="tag_tut">Tutorial</span><h4 data-i="p3t">The cleanest way to support dark mode using CSS variables and Tailwind</h4><p data-i="p3d">Handle light and dark themes with CSS variables and Tailwind, without sprinkling dark: classes everywhere.</p><small data-i="p3m">Dec 2023 · 2 min read</small></div>
     </a>
   </div>
@@ -325,15 +324,15 @@ document.querySelector(".lang").addEventListener("click",e=>{const b=e.target.cl
 
 const A="https://www.theacorn.studio/";
 const P=[
- {t:"Post0",d:"Post once. Share everywhere.",img:"../assets/apps/post0.svg",u:A+"post0",tag:"iOS · Social",c:"var(--p)"},
- {t:"Piiman",d:"Cook what you find.",img:"../assets/apps/piiman.svg",u:"https://apps.apple.com/us/app/piiman-recipe-saver/id6812401240",tag:"iOS · AI · Recipes",c:"var(--g)"},
- {t:"Nichabit",d:"Habit tracking made easy.",img:"../assets/apps/nichabit.svg",u:"https://apps.apple.com/us/app/nichabit-daily-habit-tracker/id6761253038",tag:"iOS · Habits",c:"var(--y)"},
- {t:"Leetcards",d:"The best way to study Leetcode.",img:"../assets/apps/leetcards.webp",u:"https://apps.apple.com/us/app/leetcards/id6502571848",tag:"iOS · Study",c:"var(--b)"},
- {t:"OnePushMan",d:"One Punch Man workout. Every day.",img:"../assets/apps/onepushman.svg",u:"https://apps.apple.com/us/app/push-up-tracker-onepushman/id6777450002",tag:"iOS · Fitness",c:"var(--o)"},
+ {t:"Post0",d:"Post once. Share everywhere.",img:"assets/apps/post0.svg",u:A+"post0",tag:"iOS · Social",c:"var(--p)"},
+ {t:"Piiman",d:"Cook what you find.",img:"assets/apps/piiman.svg",u:"https://apps.apple.com/us/app/piiman-recipe-saver/id6812401240",tag:"iOS · AI · Recipes",c:"var(--g)"},
+ {t:"Nichabit",d:"Habit tracking made easy.",img:"assets/apps/nichabit.svg",u:"https://apps.apple.com/us/app/nichabit-daily-habit-tracker/id6761253038",tag:"iOS · Habits",c:"var(--y)"},
+ {t:"Leetcards",d:"The best way to study Leetcode.",img:"assets/apps/leetcards.webp",u:"https://apps.apple.com/us/app/leetcards/id6502571848",tag:"iOS · Study",c:"var(--b)"},
+ {t:"OnePushMan",d:"One Punch Man workout. Every day.",img:"assets/apps/onepushman.svg",u:"https://apps.apple.com/us/app/push-up-tracker-onepushman/id6777450002",tag:"iOS · Fitness",c:"var(--o)"},
 ];
 const O=[
- {t:"Ardia browser",d:"Contributed to a free Chromium browser for the Mac: the profile switcher now keeps the active profile's icon when the rest fall back to dots.",img:"../assets/apps/ardia.svg",u:"https://github.com/ardia-browser/ardia/pull/2742",tag:"Contributor · TypeScript",c:"var(--g)"},
- {t:"Smartbanner",d:"React package for custom smart app banners.",img:"../assets/smartbanner.svg",u:"https://www.npmjs.com/package/custom-react-smartbanner",tag:"npm · React",c:"var(--v)",wide:1},
+ {t:"Ardia browser",d:"Contributed to a free Chromium browser for the Mac: the profile switcher now keeps the active profile's icon when the rest fall back to dots.",img:"assets/apps/ardia.svg",u:"https://github.com/ardia-browser/ardia/pull/2742",tag:"Contributor · TypeScript",c:"var(--g)"},
+ {t:"Smartbanner",d:"React package for custom smart app banners.",img:"assets/smartbanner.svg",u:"https://www.npmjs.com/package/custom-react-smartbanner",tag:"npm · React",c:"var(--v)",wide:1},
 ];
 const card=p=>`<a class="stk" href="${p.u}" target="_blank" rel="noopener"><div class="im${p.wide?" wide":""}" style="--c:${p.c}"><img src="${p.img}" alt="${p.t}"></div><h4>${p.t} ↗</h4><p>${tr(p,"d")}</p><small>${tr(p,"tag")}</small></a>`;
 function renderCards(){document.getElementById("stk").innerHTML=P.map(card).join("");document.getElementById("oss").innerHTML=O.map(card).join("")}
@@ -346,7 +345,7 @@ const me=document.getElementById("me");me.addEventListener("click",()=>me.classL
 // ---------- skills: icons fly in, then now and then one slips out and pops back from another side
 const SK=[["TypeScript","typescript"],["React & React Native","react"],["Next.js","nextjs"],["JavaScript","javascript"],["Node.js","nodejs"],["Tailwind CSS","tailwindcss"],["GraphQL","graphql"],["iOS · Swift","swift"],["Python","python"],["PostgreSQL","postgresql"],["Firebase","firebase"],["Docker","docker"],["Google Cloud","googlecloud"],["Jest","jest"],["OpenAI","openai"],["Claude","claude"]];
 const skl=document.getElementById("skl"),field=document.getElementById("field");
-skl.innerHTML=SK.map(([n,f])=>`<li class="sk"><span class="wave"><span class="tile"><img src="../assets/skills/${f}.svg" alt="${n}" width="44" height="44"></span></span><span class="lbl">${n}</span></li>`).join("");
+skl.innerHTML=SK.map(([n,f])=>`<li class="sk"><span class="wave"><span class="tile"><img src="assets/skills/${f}.svg" alt="${n}" width="44" height="44"></span></span><span class="lbl">${n}</span></li>`).join("");
 const motionOK=matchMedia("(prefers-reduced-motion: no-preference)").matches;
 const DIRS=[[-1,0],[1,0],[0,-1],[0,1]],dir=()=>DIRS[Math.random()*4|0],rand=(a,b)=>a+Math.random()*(b-a);
 const BACK="cubic-bezier(.34,1.7,.5,1)";
@@ -392,7 +391,7 @@ const STOPS=[
  {y:"NOW",c:"var(--y)",t:"Indie hacker",co:"Self-employed",k:"",b:["Building and shipping my own iOS apps under Acorn Studio: Piiman, Post0, LeetCards and more."]},
 ];
 const jr=document.getElementById("jr"),head=jr.querySelector(".head"),edge=jr.querySelector(".edge"),fill=jr.querySelector(".fill"),road=jr.querySelector("svg");
-jr.insertAdjacentHTML("beforeend",STOPS.map((s,i)=>`<div class="stop ${i%2?"r":"l"}">${s.lg?`<img class="lg${s.pad?" pad":""}" src="../assets/co/${s.lg}" alt="${s.co} logo">`:""}<span class="yr" style="background:${s.c}${s.c==="#204ecf"?";color:#fff":""}">${tr(s,"y")}</span><h4>${tr(s,"t")}</h4><div class="co">${s.u?`<a href="${s.u}" target="_blank" rel="noopener">${s.co} ↗</a>`:tr(s,"co")}${s.k?` <i>· ${tr(s,"k")}</i>`:""}</div><ul>${tr(s,"b").map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join(""));
+jr.insertAdjacentHTML("beforeend",STOPS.map((s,i)=>`<div class="stop ${i%2?"r":"l"}">${s.lg?`<img class="lg${s.pad?" pad":""}" src="assets/co/${s.lg}" alt="${s.co} logo">`:""}<span class="yr" style="background:${s.c}${s.c==="#204ecf"?";color:#fff":""}">${tr(s,"y")}</span><h4>${tr(s,"t")}</h4><div class="co">${s.u?`<a href="${s.u}" target="_blank" rel="noopener">${s.co} ↗</a>`:tr(s,"co")}${s.k?` <i>· ${tr(s,"k")}</i>`:""}</div><ul>${tr(s,"b").map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join(""));
 const stops=[...jr.querySelectorAll(".stop")];
 stops.forEach((s,i)=>{const d=document.createElement("span");d.className="dot";d.style.background=STOPS[i].c;jr.appendChild(d);s.dot=d});
 let L=0,marks=[],ys=[];
