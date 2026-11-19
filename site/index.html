@@ -72,7 +72,7 @@ html[lang=ja] body{line-break:strict;word-break:normal}html[lang=ja] .lede,html[
 .road .track{fill:none;stroke:var(--ink);stroke-width:4;stroke-dasharray:2 14;stroke-linecap:round;opacity:.35}
 .road .edge{fill:none;stroke:var(--ink);stroke-width:14;stroke-linecap:round}
 .road .fill{fill:none;stroke:var(--y);stroke-width:6;stroke-linecap:round}
-.jr .head{position:absolute;left:0;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;border:4px solid var(--ink);border-radius:50%;background:#fff url(assets/me-head.webp) center/cover;box-shadow:4px 4px 0 var(--ink);z-index:3;pointer-events:none}
+.jr .head{position:absolute;left:0;top:0;width:84px;height:84px;margin:-42px 0 0 -42px;background:url(assets/me-head.webp) center/contain no-repeat;z-index:3;pointer-events:none}
 .jr .dot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:4px solid var(--ink);border-radius:50%;background:#fff;z-index:2;transform:scale(.4);transition:transform .4s cubic-bezier(.3,1.8,.5,1),background .2s}
 .jr .dot.in{transform:scale(1)}
 .stop{position:relative;width:calc(50% - 90px);background:#fff;border:4px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--ink);padding:22px 22px 20px;margin-bottom:-40px;z-index:1;opacity:0;transform:translateY(46px) rotate(var(--r0)) scale(.92);transition:opacity .35s,transform .6s cubic-bezier(.25,1.6,.45,1)}
@@ -90,7 +90,7 @@ html[lang=ja] body{line-break:strict;word-break:normal}html[lang=ja] .lede,html[
 .stop ul{margin-top:12px;padding-left:20px;line-height:1.5}
 .stop li+li{margin-top:6px}
 .stop li::marker{content:"✦  "}
-@media(max-width:900px){.jr .head{width:48px;height:48px;margin:-24px 0 0 -24px;box-shadow:3px 3px 0 var(--ink)}.stop,.stop.l,.stop.r{width:auto;margin:0 0 34px 78px;--r0:4deg;--r:0deg}}
+@media(max-width:900px){.jr .head{width:64px;height:64px;margin:-32px 0 0 -32px}.stop,.stop.l,.stop.r{width:auto;margin:0 0 34px 78px;--r0:4deg;--r:0deg}}
 @media(prefers-reduced-motion:reduce){.stop,.jr .dot{transition:none}}
 section{max-width:1100px;margin:0 auto;padding:140px 18px 0}
 section:last-of-type{padding-bottom:140px}
@@ -113,6 +113,19 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
 .stk p{font-size:15px;line-height:1.4}
 .stk small{display:inline-block;margin-top:10px;font-weight:800;font-size:12px;background:var(--ink);color:#fff;padding:3px 9px;border-radius:999px}
 .hire{text-align:center;padding:110px 18px}
+.foot{background:var(--ink);color:var(--bg);padding:56px 18px 28px;border-top:4px solid var(--ink)}
+.foot .in{max-width:1100px;margin:0 auto}
+.foot .r1{display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap}
+.foot .mark{display:flex;align-items:center;gap:12px;font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:24px;letter-spacing:-.02em}
+.foot .mark img{width:44px;height:44px;background:var(--y);border:3px solid var(--bg);border-radius:12px;padding:5px}
+.foot .tag{margin-top:14px;max-width:440px;font-weight:600;line-height:1.55;opacity:.8}
+.foot .ics{display:flex;gap:10px;margin-top:20px}
+.foot .ics a{display:grid;place-items:center;width:42px;height:42px;border:3px solid var(--bg);border-radius:12px;color:var(--bg);transition:background .15s,color .15s}
+.foot .ics a:hover{background:var(--y);color:var(--ink);border-color:var(--y)}
+.foot .ics svg{width:20px;height:20px}
+.foot .bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:40px;padding-top:22px;border-top:2px solid rgba(255,247,232,.25);font-size:14px;font-weight:600;opacity:.8}
+.foot .bot a{color:inherit}
+.foot .bot a:hover{color:var(--y)}
 .hire h3{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(33px,6.75vw,90px);line-height:.88;letter-spacing:-.04em}
 .hire .big{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px}
 .cform{max-width:680px;margin:44px auto 0;text-align:left;display:grid;gap:18px}
@@ -247,7 +260,8 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
       <label><span data-i="f_name">Name</span><input name="name" autocomplete="name" maxlength="100" required></label>
       <label><span data-i="f_email">Email</span><input name="email" type="email" autocomplete="email" maxlength="200" required></label>
     </div>
-    <label><span data-i="f_msg">Message</span><textarea name="message" rows="5" maxlength="3000" required></textarea></label>
+    <label><span data-i="f_subj">Subject</span><input name="subject" maxlength="150"></label>
+    <label><span data-i="f_msg">Message</span><textarea name="message" rows="5" maxlength="3000" required data-ph="f_msg_ph" placeholder="Tell me about your idea"></textarea></label>
     <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off"></label>
     <div class="send"><button class="pill" type="submit" data-i="f_send">Send message</button><p class="status" id="cstatus" role="status" aria-live="polite"></p></div>
   </form>
@@ -259,11 +273,25 @@ h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;displ
   </div>
 </div>
 
+<footer class="foot">
+  <div class="in">
+    <div class="r1">
+      <div>
+        <div class="mark"><img src="assets/logo.svg" alt=""><span data-i="ft_name">Kittichote Kamalapirat</span></div>
+        <p class="tag" data-i="ft_tag">Frontend engineer · Bangkok, Thailand · I build products people actually use.</p>
+        <div class="ics"><a href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a><a href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.2.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg></a><a href="https://github.com/KittichoteKamalapirat/resume/blob/726a944875fe1ef9b4bbd5cdcef32c29688796ea/Dec%202023.pdf" target="_blank" rel="noopener" aria-label="Résumé" title="Résumé"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2.5V8h5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 13h8M8 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a></div>
+      </div>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en"></button><button type="button" data-l="th"></button><button type="button" data-l="ja"></button></div>
+    </div>
+    <div class="bot"><span data-i="ft_copy">© 2026 Kittichote Kamalapirat. All rights reserved.</span><a href="#" data-i="ft_top">Back to top ↑</a></div>
+  </div>
+</footer>
+
 <script>
 // ---------- languages: English is written in the page; Thai and Japanese live here. {x} marks the highlighted word in a title.
 const TX={
 th:{
- f_name:"ชื่อ",f_email:"อีเมล",f_msg:"ข้อความ",f_send:"ส่งข้อความ",f_or:"หรือติดต่อทางช่องทางอื่น",back:"← คอนเซปต์",h1:"สวัสดีครับ ผม{เชน}",tagline:"พัฒนาโปรดักต์ที่ใช้งานได้จริง",lede:"กิตติโชติ กมลาภิรัตน์ Frontend Engineer ในกรุงเทพฯ มีประสบการณ์มากกว่า 6 ปีกับ React, Next.js และ TypeScript เคยพัฒนาเว็บแอปที่ EarnIn ซึ่งมีผู้ใช้งานกว่า 1 ล้านคน และพัฒนาแอปของตัวเองแบบ Full Stack ตั้งแต่ระบบหลังบ้านจนถึง App Store รับงานทั้งฟรีแลนซ์และงานประจำ",
+ f_name:"ชื่อ",ft_name:"กิตติโชติ กมลาภิรัตน์",ft_tag:"Frontend Engineer · กรุงเทพฯ ประเทศไทย",ft_copy:"© 2026 กิตติโชติ กมลาภิรัตน์ สงวนลิขสิทธิ์",ft_top:"กลับขึ้นด้านบน ↑",f_subj:"หัวข้อ",f_msg_ph:"รายละเอียดงานหรือโปรเจกต์ที่ต้องการติดต่อ",f_email:"อีเมล",f_msg:"ข้อความ",f_send:"ส่งข้อความ",f_or:"หรือติดต่อทางช่องทางอื่น",back:"← คอนเซปต์",h1:"สวัสดีครับ ผม{เชน}",tagline:"พัฒนาโปรดักต์ที่ใช้งานได้จริง",lede:"กิตติโชติ กมลาภิรัตน์ Frontend Engineer ในกรุงเทพฯ มีประสบการณ์มากกว่า 6 ปีกับ React, Next.js และ TypeScript เคยพัฒนาเว็บแอปที่ EarnIn ซึ่งมีผู้ใช้งานกว่า 1 ล้านคน และพัฒนาแอปของตัวเองแบบ Full Stack ตั้งแต่ระบบหลังบ้านจนถึง App Store รับงานทั้งฟรีแลนซ์และงานประจำ",
  cta1:"ดูผลงาน ↓",cta2:"จ้าง",hi:"สวัสดี",wfh:"โหมด WFH",s_skills:"{เทคโนโลยี}",s_made:"{ผลงาน}",acorn:"ผลงานภายใต้ Acorn Studio ↗",oss:"โอเพนซอร์ส",
  s_journey:"{ประสบการณ์}",s_wrote:"{บทความ}",tag_case:"กรณีศึกษา",tag_essay:"ความเรียง",tag_tut:"บทสอน",
  p1m:"พ.ย. 2026 · อ่าน 3 นาที",
@@ -285,7 +313,7 @@ th:{
   "NOW":{y:"ปัจจุบัน",t:"Indie Developer",co:"ทำงานอิสระ",b:["สร้างและปล่อยแอป iOS ของตัวเองภายใต้ Acorn Studio: Piiman, Post0, LeetCards และอื่น ๆ"]}}
 },
 ja:{
- f_name:"お名前",f_email:"メールアドレス",f_msg:"メッセージ",f_send:"送信する",f_or:"その他の連絡先",back:"← コンセプト",h1:"こんにちは、{キッティ}です。",tagline:"実際に使われるプロダクトを開発しています。",lede:"キッティチョート・カマラピラット。バンコク在住のフロントエンドエンジニアです。React・Next.js・TypeScript を中心に 6 年以上の開発経験があります。EarnIn では 100 万人以上が利用する Web アプリを開発しました。個人開発では、データベースから App Store での公開までフルスタックで担当しています。フリーランス・正社員のご相談を受け付けています。",
+ f_name:"お名前",ft_name:"キッティチョート・カマラピラット",ft_tag:"フロントエンドエンジニア・タイ バンコク在住",ft_copy:"© 2026 Kittichote Kamalapirat. All rights reserved.",ft_top:"ページトップへ ↑",f_subj:"件名",f_msg_ph:"ご相談内容をご記入ください",f_email:"メールアドレス",f_msg:"メッセージ",f_send:"送信する",f_or:"その他の連絡先",back:"← コンセプト",h1:"こんにちは、{キッティ}です。",tagline:"実際に使われるプロダクトを開発しています。",lede:"キッティチョート・カマラピラット。バンコク在住のフロントエンドエンジニアです。React・Next.js・TypeScript を中心に 6 年以上の開発経験があります。EarnIn では 100 万人以上が利用する Web アプリを開発しました。個人開発では、データベースから App Store での公開までフルスタックで担当しています。フリーランス・正社員のご相談を受け付けています。",
  cta1:"制作実績を見る ↓",cta2:"お問い合わせ",hi:"こんにちは",wfh:"WFH モード",s_skills:"{スキル}",s_made:"{制作実績}",acorn:"Acorn Studio のアプリ ↗",oss:"オープンソース",
  s_journey:"{経歴}",s_wrote:"{ブログ}",tag_case:"ケーススタディ",tag_essay:"エッセイ",tag_tut:"チュートリアル",
  p1m:"2026年11月 · 3分",
@@ -317,10 +345,11 @@ function setLang(l,first){
   LANG=l;document.documentElement.lang=l;
   document.querySelectorAll("[data-i]").forEach(el=>{if(el._en===undefined)el._en=el.innerHTML;const v=TX[l]&&TX[l][el.dataset.i];
     if(v===undefined){el.innerHTML=el._en;return}const open=(el._en.match(/<span[^>]*>/)||["<span>"])[0];el.innerHTML=v.replace(/\{(.+?)\}/,open+"$1</span>")});
-  document.querySelectorAll(".lang button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.l===l);b.innerHTML=FLAG[b.dataset.l]+"<span>"+LBL[l][b.dataset.l]+"</span>";b.title=FULL[b.dataset.l];b.setAttribute("aria-label",FULL[b.dataset.l]);b.lang=l});document.querySelector(".lang").setAttribute("aria-label",LNAME[l]);
+  document.querySelectorAll("[data-ph]").forEach(el=>{if(el._ph===undefined)el._ph=el.placeholder;el.placeholder=(TX[l]&&TX[l][el.dataset.ph])||el._ph});
+  document.querySelectorAll(".lang button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.l===l);b.innerHTML=FLAG[b.dataset.l]+"<span>"+LBL[l][b.dataset.l]+"</span>";b.title=FULL[b.dataset.l];b.setAttribute("aria-label",FULL[b.dataset.l]);b.lang=l});document.querySelectorAll(".lang").forEach(g=>g.setAttribute("aria-label",LNAME[l]));
   if(!first){try{localStorage.setItem("lang",l)}catch(e){}const u=new URL(location);if(l==="en")u.searchParams.delete("lang");else u.searchParams.set("lang",l);history.replaceState(null,"",u)}
   onLang.forEach(f=>f())}
-document.querySelector(".lang").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.l!==LANG)setLang(b.dataset.l)});
+document.querySelectorAll(".lang").forEach(g=>g.addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.l!==LANG)setLang(b.dataset.l)}));
 
 const A="https://www.theacorn.studio/";
 const P=[
