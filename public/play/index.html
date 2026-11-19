@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shane's Playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;800&family=Noto+Sans+Thai:wght@400;600;800;900&family=Noto+Sans+JP:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff7e8;--ink:#121212;--y:#ffe14d;--p:#ff7ac6;--b:#4d7cff;--g:#3ddc84;--o:#ff6a3d;--v:#a98bff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Archivo",var(--xf),system-ui,sans-serif;overflow-x:hidden}
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;pointer-events:none}
+.top>*{pointer-events:auto}
+.big .pill{display:inline-flex;align-items:center;gap:10px}.big .ic{width:1.05em;height:1.05em;flex:none}.ic-w{display:contents}
+:root{--xf:sans-serif}html[lang=th]{--xf:"Noto Sans Thai"}html[lang=ja]{--xf:"Noto Sans JP"}
+html:not([lang=en]) .hero h1,html:not([lang=en]) h3.sec,html:not([lang=en]) .hire h3{letter-spacing:0;line-height:1.12}
+html:not([lang=en]) .hero h1{font-size:clamp(44px,6.4vw,92px)}html[lang=ja] .hero h1{font-size:clamp(38px,5.2vw,76px)}
+html[lang=ja] body{line-break:strict;word-break:normal}html[lang=ja] .lede,html[lang=ja] p,html[lang=ja] li{word-break:auto-phrase}
+.lang{display:flex;align-items:center;background:#fff;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);padding:3px;gap:2px}
+.lang button{font:800 13px/1 "Archivo","Noto Sans Thai","Noto Sans JP",sans-serif;border:0;background:none;color:var(--ink);padding:5px 11px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:34px;justify-content:center}
+.top .pill{white-space:nowrap}
+@media(max-width:430px){.lang button{padding:5px 8px}.lang button:not([aria-pressed=true]) span{display:none}}
+.lang .flag{width:21px;height:14px;border-radius:3px;outline:2px solid var(--ink);outline-offset:-1px;flex:none}
+.lang button[aria-pressed=true]{background:var(--y);box-shadow:inset 0 0 0 2px var(--ink)}
+.lang button:focus-visible{outline:3px solid var(--b);outline-offset:1px}
+.pill{background:#fff;border:3px solid var(--ink);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px;box-shadow:3px 3px 0 var(--ink);text-decoration:none;color:var(--ink);cursor:pointer;font-family:inherit;transition:transform .1s,box-shadow .1s}
+.pill:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.pill:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.ctrls{display:flex;gap:10px}
+.hero-wrap{border-bottom:4px solid var(--ink)}
+.hero{height:calc(100vh - 4px);height:calc(100svh - 4px);min-height:620px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:100%;align-items:center;gap:32px;max-width:1240px;margin:0 auto;padding:72px 24px 0}
+.hero>div:first-child{padding-bottom:40px}
+.hero h1{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(52px,8vw,112px);line-height:.88;letter-spacing:-.04em}
+.hero h1 span{background:var(--y);border:4px solid var(--ink);padding:0 14px;display:inline-block;transform:rotate(-2deg)}
+.hero .tagline{margin-top:26px;font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(22px,2.4vw,32px);line-height:1.15;text-wrap:balance}
+.hero .lede{margin-top:16px;font-size:clamp(16px,1.4vw,19px);line-height:1.55;font-weight:600;max-width:540px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .cta .pill{font-size:17px;padding:12px 22px}
+.portrait{position:relative;justify-self:center;align-self:center;width:min(330px,100%);aspect-ratio:2/3;max-height:calc(100svh - 170px);margin-top:50px}
+.pcard{position:absolute;inset:0;border:4px solid var(--ink);border-radius:28px;box-shadow:10px 10px 0 var(--ink);background:var(--b) radial-gradient(rgba(255,255,255,.28) 2px,transparent 2.2px) 0 0/16px 16px}
+.pclip{position:absolute;inset:0;clip-path:inset(-80% -80% 4px -80%)}
+.me{position:absolute;left:50%;bottom:4px;height:106%;aspect-ratio:2/3;transform:translateX(-50%);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.me img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .25s ease}
+.me .wfh,.me .tag-wfh{opacity:0}
+.me .tag{white-space:nowrap;position:absolute;left:66%;top:6%;font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(18px,2vw,24px);background:#fff;border:3px solid var(--ink);border-radius:16px;padding:6px 14px;box-shadow:3px 3px 0 var(--ink);transform:rotate(6deg);transition:opacity .2s ease,transform .3s cubic-bezier(.2,1.6,.4,1);pointer-events:none}
+.me .tag::after{content:"";position:absolute;left:10px;bottom:-11px;width:14px;height:14px;background:inherit;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);transform:rotate(45deg) skew(10deg,10deg)}
+.me .tag-wfh{background:var(--p)}
+@media(max-width:520px){.me .tag-wfh{left:auto;right:-2%;top:1%;font-size:15px;padding:5px 10px}}
+.me.on .office,.me.on .tag-hi{opacity:0}
+.me.on .wfh,.me.on .tag-wfh{opacity:1}
+.me.on .tag-wfh{transform:rotate(-4deg) scale(1.08)}
+@media(hover:hover){.me:hover .office,.me:hover .tag-hi{opacity:0}.me:hover .wfh,.me:hover .tag-wfh{opacity:1}.me:hover .tag-wfh{transform:rotate(-4deg) scale(1.08)}}
+@media(max-width:820px){.hero{grid-template-columns:1fr;grid-template-rows:auto;height:auto;min-height:auto;padding-top:80px;text-align:left}.portrait{grid-row:2;width:min(64vw,280px);max-height:none;margin:70px auto 56px}}
+@media(prefers-reduced-motion:reduce){.me img,.me .tag{transition:none}}
+/* skills */
+.field{position:relative;padding:20px 0 10px}
+.spot{position:absolute;left:0;top:0;width:380px;height:380px;margin:-190px 0 0 -190px;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(circle,#121212 1.7px,transparent 2.2px) 0 0/14px 14px;-webkit-mask:radial-gradient(closest-side,#000 30%,transparent);mask:radial-gradient(closest-side,#000 30%,transparent)}
+.field.hot .spot{opacity:.28}
+.skills{position:relative;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:64px 24px;place-items:center;max-width:720px;margin:0 auto}
+.sk{position:relative;display:flex;justify-content:center;width:100%}
+.sk .wave{display:block}
+.tile{display:grid;place-items:center;width:100px;height:100px;border:4px solid var(--ink);border-radius:20px;box-shadow:5px 5px 0 var(--ink);transform-origin:50% 100%;will-change:transform}
+.tile{background:#fff}.tile img{width:54px;height:54px;object-fit:contain}
+.sk .lbl{position:absolute;left:50%;top:100%;margin-top:14px;transform:translate(-50%,4px);white-space:nowrap;background:var(--ink);color:#fff;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;z-index:2}
+.sk:hover .lbl{opacity:1;transform:translate(-50%,0)}
+@media(hover:none){.sk .lbl{opacity:1;transform:translate(-50%,0);background:none;color:var(--ink);padding:0;font-size:11px;white-space:normal;width:110%;text-align:center;line-height:1.2}}
+@media(max-width:900px){.skills{grid-template-columns:repeat(4,1fr);gap:58px 10px}.tile{width:68px;height:68px;border-radius:16px}.tile img{width:38px;height:38px}}
+/* journey */
+.jr{position:relative;padding:10px 0 40px}
+.jr svg.road{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.road .track{fill:none;stroke:var(--ink);stroke-width:4;stroke-dasharray:2 14;stroke-linecap:round;opacity:.35}
+.road .edge{fill:none;stroke:var(--ink);stroke-width:14;stroke-linecap:round}
+.road .fill{fill:none;stroke:var(--y);stroke-width:6;stroke-linecap:round}
+.jr .head{position:absolute;left:0;top:0;width:64px;height:64px;margin:-32px 0 0 -32px;border:4px solid var(--ink);border-radius:50%;background:#fff url(../assets/me-head.webp) center/cover;box-shadow:4px 4px 0 var(--ink);z-index:3;pointer-events:none}
+.jr .dot{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border:4px solid var(--ink);border-radius:50%;background:#fff;z-index:2;transform:scale(.4);transition:transform .4s cubic-bezier(.3,1.8,.5,1),background .2s}
+.jr .dot.in{transform:scale(1)}
+.stop{position:relative;width:calc(50% - 90px);background:#fff;border:4px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--ink);padding:22px 22px 20px;margin-bottom:-40px;z-index:1;opacity:0;transform:translateY(46px) rotate(var(--r0)) scale(.92);transition:opacity .35s,transform .6s cubic-bezier(.25,1.6,.45,1)}
+.stop.l{margin-right:auto;--r0:-6deg;--r:-1.2deg}.stop.r{margin-left:auto;--r0:6deg;--r:1.2deg}
+.stop.in{opacity:1;transform:rotate(var(--r))}
+.stop:last-child{margin-bottom:0}
+.stop .yr{display:inline-block;font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:16px;padding:4px 12px;border:3px solid var(--ink);border-radius:10px;transform:rotate(-3deg)}
+.stop .lg{position:absolute;top:16px;right:16px;width:52px;height:52px;object-fit:contain;background:#fff;border:3px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);transform:rotate(5deg)}
+.stop .lg.pad{padding:5px}
+.stop:has(.lg) h4{margin-right:58px}
+.stop h4{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(22px,2.4vw,28px);line-height:1.05;margin-top:14px}
+.stop .co{margin-top:6px;font-weight:800}
+.stop .co a{color:var(--ink);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:3px;text-decoration-color:var(--p)}.stop .co a:hover{background:var(--y)}
+.stop .co i{font-style:normal;font-weight:600;color:#12121299}
+.stop ul{margin-top:12px;padding-left:20px;line-height:1.5}
+.stop li+li{margin-top:6px}
+.stop li::marker{content:"✦  "}
+@media(max-width:900px){.jr .head{width:48px;height:48px;margin:-24px 0 0 -24px;box-shadow:3px 3px 0 var(--ink)}.stop,.stop.l,.stop.r{width:auto;margin:0 0 34px 78px;--r0:4deg;--r:0deg}}
+@media(prefers-reduced-motion:reduce){.stop,.jr .dot{transition:none}}
+section{max-width:1100px;margin:0 auto;padding:140px 18px 0}
+section:last-of-type{padding-bottom:140px}
+h3.sec{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(30px,5.25vw,66px);line-height:.9;letter-spacing:-.03em;margin-bottom:44px}
+h3.sec span{background:var(--y);border:4px solid var(--ink);padding:0 12px;display:inline-block;transform:rotate(-2deg)}
+.stickers{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:30px 26px}
+.grp{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 30px}
+.grp+.stickers+.grp{margin-top:72px}
+.grp>a,.grp>span{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:20px;color:var(--ink);text-decoration:none;background:#fff;border:4px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:8px 16px;display:inline-flex;align-items:center;gap:10px;transition:transform .2s,box-shadow .2s}
+.grp>a:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.grp>a img{width:30px;height:30px;border-radius:8px;border:2px solid var(--ink);background:#fff}
+.stk{background:#fff;border:4px solid var(--ink);border-radius:22px;box-shadow:7px 7px 0 var(--ink);padding:14px;text-decoration:none;color:var(--ink);transition:transform .25s cubic-bezier(.2,1.6,.4,1);display:block}
+.stk:nth-child(odd){transform:rotate(-2deg)}.stk:nth-child(even){transform:rotate(2deg)}
+.stk:hover{transform:rotate(0) scale(1.05)}
+.stk .im{height:150px;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--c,#f1f1f1);display:grid;place-items:center;background-image:radial-gradient(rgba(18,18,18,.16) 1.5px,transparent 1.6px);background-size:12px 12px}
+.stk .im img{width:96px;height:96px;object-fit:cover;border:3px solid var(--ink);border-radius:24px;box-shadow:5px 5px 0 var(--ink);background:#fff;transition:transform .3s cubic-bezier(.2,1.6,.4,1)}
+.stk:hover .im img{transform:rotate(-6deg) scale(1.08)}
+.stk .im.wide img{width:auto;height:90px;border-radius:14px;padding:4px 10px}
+.stk h4{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:24px;margin:12px 0 4px}
+.stk p{font-size:15px;line-height:1.4}
+.stk small{display:inline-block;margin-top:10px;font-weight:800;font-size:12px;background:var(--ink);color:#fff;padding:3px 9px;border-radius:999px}
+.hire{text-align:center;padding:110px 18px}
+.hire h3{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(33px,6.75vw,90px);line-height:.88;letter-spacing:-.04em}
+.hire .big{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:16px}
+.cform{max-width:680px;margin:44px auto 0;text-align:left;display:grid;gap:18px}
+.cform .row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cform label{display:grid;gap:8px;font-weight:800;font-size:15px}
+.cform input,.cform textarea{font:600 17px/1.4 "Archivo",var(--xf),sans-serif;color:var(--ink);background:#fff;border:4px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 var(--ink);padding:12px 14px;width:100%;resize:vertical}
+.cform input:focus,.cform textarea:focus{outline:none;box-shadow:5px 5px 0 var(--b)}
+.cform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cform .send{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cform button{font-size:18px;padding:14px 26px;background:var(--ink);color:#fff;box-shadow:4px 4px 0 var(--p)}
+.cform button:disabled{opacity:.6;cursor:wait}
+.cform .status{font-weight:800}
+.cform .status.ok{color:#0a7a3c}.cform .status.err{color:#c0262d}
+.hire .or{margin-top:48px;font-weight:700}
+@media(max-width:600px){.cform .row{grid-template-columns:1fr}}
+.hire .big a{font-size:20px;padding:16px 26px}
+.posts{display:grid;gap:22px}
+.post{display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:center;background:#fff;border:4px solid var(--ink);border-radius:20px;padding:16px;box-shadow:6px 6px 0 var(--ink);text-decoration:none;color:var(--ink);transition:transform .1s,box-shadow .1s}
+.post:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.post .im{height:130px;border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#121212}
+.post img{width:100%;height:100%;object-fit:cover}
+.post h4{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:clamp(20px,2.4vw,26px);line-height:1.15}
+.post p{margin-top:8px;line-height:1.5}
+.ptag{display:inline-block;font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:12px;text-transform:uppercase;letter-spacing:.04em;padding:3px 10px;border:3px solid var(--ink);border-radius:10px;box-shadow:2px 2px 0 var(--ink);transform:rotate(-3deg);margin-bottom:10px}
+.ptag.case{background:var(--b);color:#fff}.ptag.essay{background:var(--p)}.ptag.tutorial{background:var(--g)}
+.post small{display:inline-block;margin-top:12px;font-weight:800;font-size:12px;background:var(--ink);color:#fff;padding:3px 9px;border-radius:999px}
+.tt{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+.tt>p{flex:1 1 280px;font-size:18px;line-height:1.5;font-weight:600}
+.badge{position:relative;cursor:pointer;width:250px;background:#fff;border:4px solid var(--ink);border-radius:24px;box-shadow:8px 8px 0 #204ecf;padding:26px 20px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;transform:rotate(-3deg);transition:transform .25s cubic-bezier(.2,1.6,.4,1)}
+.badge:hover{transform:rotate(0) scale(1.04)}
+.badge h4{font-family:"Archivo Black",var(--xf),sans-serif;font-weight:900;font-synthesis:none;font-size:24px;line-height:1;color:#204ecf}
+.badge .rule{width:100%;height:4px;background:var(--ink);border-radius:2px}
+.badge .vet{font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:-4px}
+.badge .pill{background:#204ecf;color:#fff;margin-top:6px;font-size:16px}
+.badge .pill::after{content:"";position:absolute;inset:-4px;border-radius:24px}
+@media(max-width:640px){section{padding-top:96px}section:last-of-type{padding-bottom:96px}.post{grid-template-columns:1fr}}
+</style>
+<meta property="og:title" content="Seven Futures" />
+<meta property="og:description" content="A creative portfolio showcasing seven distinct interactive themes and prototypes for a software engineer and indie hacker." />
+<meta property="og:url" content="https://kittichotekamalapirat.github.io/play/" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="https://kittichotekamalapirat.github.io/assets/me-office.webp" />
+<meta property="og:image:width" content="1280" />
+<meta property="og:image:height" content="720" />
+<meta name="twitter:image" content="https://kittichotekamalapirat.github.io/assets/me-office.webp" />
+<meta name="twitter:card" content="summary_large_image" /></head>
+<body>
+<div class="top">
+  <a class="pill" href="../" data-i="back">← concepts</a>
+  <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en"></button><button type="button" data-l="th"></button><button type="button" data-l="ja"></button></div>
+</div>
+
+<div class="hero-wrap"><header class="hero">
+  <div>
+    <h1 data-i="h1">Hi, I'm <span>Shane</span>.</h1>
+    <p class="tagline" data-i="tagline">I build products people actually use.</p>
+    <p class="lede" data-i="lede">Kittichote Kamalapirat, a frontend engineer in Bangkok with 6+ years of React, Next.js and TypeScript. At EarnIn I built a web app that reached 1M+ users. On my own apps I work full stack, from database to App Store. Open to freelance and full-time roles.</p>
+    <div class="cta">
+      <a class="pill" style="background:var(--y)" href="#made" data-i="cta1">See what I made ↓</a>
+      <a class="pill" style="background:var(--p)" href="#hire" data-i="cta2">Hire me</a>
+    </div>
+  </div>
+  <div class="portrait"><div class="pcard" aria-hidden="true"></div><div class="pclip">
+  <div class="me" id="me" role="img" aria-label="Illustration of Shane holding a laptop. Hover to see the work-from-home version.">
+    <img class="office" src="../assets/me-office.webp" alt="" width="640" height="960">
+    <img class="wfh" src="../assets/me-wfh.webp" alt="" width="640" height="960">
+    <span class="tag tag-hi" data-i="hi">Hi.</span>
+    <span class="tag tag-wfh" data-i="wfh">WFH mode</span>
+  </div>
+  </div></div>
+</header></div>
+
+<section id="skills">
+  <h3 class="sec" data-i="s_skills">Stuff I'm <span style="background:var(--o)">good at</span></h3>
+  <div class="field" id="field"><div class="spot" aria-hidden="true"></div><ul class="skills" id="skl"></ul></div>
+</section>
+
+<section id="made">
+  <h3 class="sec" data-i="s_made">Things I <span>made</span></h3>
+  <div class="grp"><a href="https://www.theacorn.studio/" target="_blank" rel="noopener"><img src="../assets/apps/acorn.svg" alt=""><span data-i="acorn">Shipped under Acorn Studio ↗</span></a></div>
+  <div class="stickers" id="stk"></div>
+  <div class="grp"><span data-i="oss">Open source</span></div>
+  <div class="stickers" id="oss"></div>
+</section>
+
+<section id="journey">
+  <h3 class="sec" data-i="s_journey">My <span style="background:var(--p)">journey</span></h3>
+  <div class="jr" id="jr">
+    <svg class="road" aria-hidden="true"><path class="track"/><path class="edge"/><path class="fill"/></svg>
+    <div class="head" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section id="writing">
+  <h3 class="sec" data-i="s_wrote">Things I <span style="background:var(--g)">wrote</span></h3>
+  <div class="posts">
+    <a class="post" href="blog/piiman-case-study/">
+      <div class="im"><img src="blog/images/screenshots.png" alt="Piiman App Store screenshots"></div>
+      <div><span class="ptag case" data-i="tag_case">Case study</span><h4 data-i="p1t">Piiman: from a daily annoyance to the App Store</h4><p data-i="p1d">What I built, the decisions behind it, and where it stands today.</p><small data-i="p1m">Nov 2026 · 3 min read</small></div>
+    </a>
+    <a class="post" href="blog/piiman-essay/">
+      <div class="im" style="background:#fff"><img src="blog/images/mascot.gif" alt="The Piiman bell pepper mascot" style="object-fit:contain;padding:10px"></div>
+      <div><span class="ptag essay" data-i="tag_essay">Essay</span><h4 data-i="p2t">Small problems, every day</h4><p data-i="p2d">Why I built a meal planner when there are already a hundred of them.</p><small data-i="p2m">Nov 2026 · 4 min read</small></div>
+    </a>
+    <a class="post" href="blog/dark-mode/">
+      <div class="im"><img src="../assets/blog-dark-mode.webp" alt="Dark mode with CSS variables and Tailwind"></div>
+      <div><span class="ptag tutorial" data-i="tag_tut">Tutorial</span><h4 data-i="p3t">The cleanest way to support dark mode using CSS variables and Tailwind</h4><p data-i="p3d">Handle light and dark themes with CSS variables and Tailwind, without sprinkling dark: classes everywhere.</p><small data-i="p3m">Dec 2023 · 2 min read</small></div>
+    </a>
+  </div>
+</section>
+
+<section id="toptal">
+  <h3 class="sec" data-i="s_top">Top <span style="background:var(--b);color:#fff">3%</span></h3>
+  <div class="tt">
+    <!-- Toptal "Top 3% Talent" badge, restyled. Keep the Hire me link (incl. #NVDEJp) unchanged: it is what Toptal's badge check looks for. Its ::after stretches over the whole badge so the card is clickable. -->
+    <div class="badge">
+      <svg width="72" viewBox="0 0 60 17" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m20.85 6.38 6.06-.89 2.72-5.49 2.71 5.49 6.06.89-4.39 4.28 1.04 6.03-5.42-2.85-5.43 2.85 1.04-6.03zm33.06 7.17 1.85-.27.82-1.67.83 1.67 1.84.27-1.33 1.31.31 1.83-1.65-.87-1.66.87.32-1.83zm-3.38-3.01-3.61-.52-1.61-3.26-1.62 3.26-3.6.52 2.6 2.55-.61 3.59 3.23-1.69 3.21 1.69-.61-3.59zm-45.19 3.01-1.85-.27-.82-1.67-.83 1.67-1.84.27 1.33 1.31-.31 1.83 1.65-.87 1.65.87-.31-1.83zm3.38-3.01 3.61-.52 1.61-3.26 1.61 3.26 3.61.52-2.6 2.55.61 3.59-3.23-1.69-3.22 1.69.62-3.59z" fill="#00c3ff" stroke="#121212" stroke-width=".6"/></svg>
+      <h4>TOP 3% TALENT</h4>
+      <div class="rule"></div>
+      <span class="vet">Vetted by</span>
+      <svg style="width:110px" viewBox="0 0 108 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Toptal"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.11 0L14.82 6.7C14.87 6.75 14.91 6.8 14.97 6.85L20.82 12.7L11.31 22.16L15.66 26.52L12.75 29.41L6.09 22.75C6.01 22.68 5.93 22.6 5.85 22.52L0 16.68L9.48 7.25L5.16 2.94L8.11 0ZM12.36 10.5C12.27 10.48 12.18 10.48 12.1 10.5C12.01 10.53 11.94 10.57 11.78 10.72L6.37 16.11C6.21 16.27 6.17 16.34 6.15 16.42C6.12 16.51 6.12 16.6 6.15 16.68C6.17 16.77 6.22 16.85 6.37 17L8.09 18.72C8.24 18.87 8.31 18.91 8.4 18.94C8.49 18.96 8.57 18.96 8.66 18.94C8.75 18.91 8.82 18.87 8.97 18.72L14.38 13.33C14.54 13.18 14.58 13.1 14.61 13.02C14.63 12.93 14.63 12.85 14.61 12.76C14.59 12.67 14.54 12.6 14.39 12.45L12.67 10.73C12.52 10.57 12.44 10.53 12.36 10.5Z" fill="#204ecf"/><path fill-rule="evenodd" clip-rule="evenodd" d="M62.65 7.76C64.76 7.76 66.56 8.58 67.99 10.16C69.45 11.69 70.18 13.8 70.17 16.42C70.17 18.98 69.42 21.22 67.93 22.8C66.46 24.37 64.59 25.17 62.35 25.17C60.42 25.16 58.67 24.47 57.51 23.28L57.35 23.11L57.34 29.86L53.52 29.85V29.57L53.56 7.96L57.36 7.96L57.35 10.6C58.6 9.19 60.61 7.76 62.65 7.76ZM87.1 7.82C89.28 7.82 90.78 8.31 91.94 9.26C93.05 10.18 93.64 11.82 93.69 13.55L93.69 13.81L93.67 24.95H89.8L89.8 24.49C89.8 24.01 89.8 23.52 89.8 23.02C88.68 24.57 87.12 25.32 85.04 25.32C83.39 25.32 81.99 24.82 80.97 23.9C79.94 22.95 79.39 21.66 79.39 20.16C79.41 17.33 81.41 15.37 84.91 14.76L85.18 14.71L89.82 13.98V13.61C89.82 12.83 89.59 11.89 89.13 11.5C88.66 11.1 88.09 10.77 87.1 10.77C84.37 10.77 83.81 12.78 83.78 13.79L83.78 13.88L80.36 13.92C80.36 12.43 81.05 10.5 82.44 9.29C83.56 8.32 85.19 7.87 86.77 7.82L87.07 7.82H87.1ZM72.12 3.46L75.93 3.46L75.92 8.02L79.45 8.02L79.45 11.2L75.91 11.19L75.9 19.73C75.9 20.67 76.09 21.29 76.5 21.58C76.93 21.88 77.8 21.6 77.8 21.6L78.14 24.92C78.14 24.92 76.94 25.23 76.18 25.23C75.19 25.23 74.34 24.98 73.69 24.48C72.63 23.68 72.09 22.28 72.09 20.31L72.11 11.19L68.92 8L72.12 8.01L72.12 3.46ZM49.66 10.26C50.76 11.39 52.07 13.4 52.06 16.52C52.05 19.63 50.74 21.63 49.65 22.76C48.15 24.3 46.11 25.18 44.06 25.18C43.98 25.18 43.9 25.18 43.81 25.17C41.62 25.16 39.68 24.38 38.06 22.84C36.43 21.29 35.6 19.16 35.6 16.48C35.6 13.8 36.44 11.66 38.07 10.12C39.69 8.59 41.62 7.82 43.82 7.82C45.99 7.75 48.11 8.65 49.66 10.26ZM40.85 3.22V6.99L33.49 7L33.51 24.97L29.54 24.96V24.62L29.57 6.99H22.06L22.07 3.22H40.85ZM95.53 3.47L98.95 3.48V3.57L98.92 24.95L95.5 24.94V24.84L95.53 3.47ZM89.82 17.05L86.01 17.69C84.15 18.01 83.29 18.73 83.28 19.99C83.27 21.14 84.09 21.91 85.37 21.98L85.53 21.98H85.55C87.99 21.98 89.72 20.08 89.81 17.31L89.82 17.09V17.05ZM43.8 11.21C42.52 11.21 41.41 11.7 40.51 12.68C39.63 13.64 39.18 14.92 39.18 16.49C39.18 18.07 39.63 19.35 40.51 20.31C41.4 21.29 42.51 21.78 43.79 21.79C45.09 21.79 46.21 21.3 47.1 20.32C48 19.34 48.45 18.06 48.46 16.51C48.47 14.95 48.01 13.67 47.11 12.69C46.21 11.71 45.1 11.21 43.8 11.21ZM61.74 11.33H61.72C60.44 11.33 59.38 11.79 58.48 12.76C57.58 13.7 57.13 14.92 57.12 16.39C57.12 17.88 57.57 19.22 58.47 20.2C59.39 21.14 60.45 21.61 61.72 21.61C63.01 21.61 64.1 21.13 64.97 20.2C65.88 19.23 66.32 17.9 66.33 16.41C66.33 14.93 65.87 13.71 64.99 12.78C64.12 11.82 63.03 11.33 61.74 11.33Z" fill="#262d3d"/></svg>
+      <a class="pill" target="_blank" rel="noopener noreferrer" href="https://www.toptal.com/developers/resume/kittichote-kamalapirat#NVDEJp">Hire me</a>
+    </div>
+    <p data-i="tt">I'm in Toptal's network of freelance engineers, which they say is the top 3% of applicants. If you want to hire me through them, the badge takes you to my Toptal profile.</p>
+  </div>
+</section>
+
+<div class="hire" id="hire" style="background:var(--y);border-top:4px solid var(--ink)">
+  <h3 data-i="hire_h">Let's make<br>something fun.</h3>
+  <p style="font-weight:600;margin-top:18px;font-size:18px" data-i="hire_p">Freelance, contract, or full-time.</p>
+  <form class="cform" id="cform" novalidate>
+    <div class="row">
+      <label><span data-i="f_name">Name</span><input name="name" autocomplete="name" maxlength="100" required></label>
+      <label><span data-i="f_email">Email</span><input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+    </div>
+    <label><span data-i="f_msg">Message</span><textarea name="message" rows="5" maxlength="3000" required></textarea></label>
+    <label class="hp" aria-hidden="true">Company<input name="company" tabindex="-1" autocomplete="off"></label>
+    <div class="send"><button class="pill" type="submit" data-i="f_send">Send message</button><p class="status" id="cstatus" role="status" aria-live="polite"></p></div>
+  </form>
+  <p class="or" data-i="f_or">Or find me here:</p>
+  <div class="big">
+    <a class="pill" style="background:var(--p)" href="https://www.linkedin.com/in/kittichote-kamalapirat-076aaa120/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+    <a class="pill" style="background:var(--b);color:#fff" href="https://github.com/kittichotekamalapirat" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.2.9 2.3v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg>GitHub ↗</a>
+    <a class="pill" href="https://github.com/KittichoteKamalapirat/resume/blob/726a944875fe1ef9b4bbd5cdcef32c29688796ea/Dec%202023.pdf" target="_blank" rel="noopener" ><span class="ic-w"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z" fill="#fff" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2.5V8h5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 13h8M8 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span data-i="resume">Résumé ↗</span></a>
+  </div>
+</div>
+
+<script>
+// ---------- languages: English is written in the page; Thai and Japanese live here. {x} marks the highlighted word in a title.
+const TX={
+th:{
+ f_name:"ชื่อ",f_email:"อีเมล",f_msg:"ข้อความ",f_send:"ส่งข้อความ",f_or:"หรือติดต่อทางช่องทางอื่น",back:"← คอนเซปต์",h1:"สวัสดีครับ ผม{เชน}",tagline:"พัฒนาโปรดักต์ที่ใช้งานได้จริง",lede:"กิตติโชติ กมลาภิรัตน์ Frontend Engineer ในกรุงเทพฯ มีประสบการณ์มากกว่า 6 ปีกับ React, Next.js และ TypeScript เคยพัฒนาเว็บแอปที่ EarnIn ซึ่งมีผู้ใช้งานกว่า 1 ล้านคน และพัฒนาแอปของตัวเองแบบ Full Stack ตั้งแต่ระบบหลังบ้านจนถึง App Store รับงานทั้งฟรีแลนซ์และงานประจำ",
+ cta1:"ดูผลงาน ↓",cta2:"จ้าง",hi:"สวัสดี",wfh:"โหมด WFH",s_skills:"{เทคโนโลยี}",s_made:"{ผลงาน}",acorn:"ผลงานภายใต้ Acorn Studio ↗",oss:"โอเพนซอร์ส",
+ s_journey:"{ประสบการณ์}",s_wrote:"{บทความ}",tag_case:"กรณีศึกษา",tag_essay:"ความเรียง",tag_tut:"บทสอน",
+ p1m:"พ.ย. 2026 · อ่าน 3 นาที",
+ p2m:"พ.ย. 2026 · อ่าน 4 นาที",
+ p3m:"ธ.ค. 2023 · อ่าน 2 นาที",
+ s_top:"ท็อป {3%}",tt:"เป็นสมาชิกเครือข่ายนักพัฒนาฟรีแลนซ์ของ Toptal ซึ่งคัดเลือกเพียง 3% แรกของผู้สมัคร หากต้องการจ้างงานผ่าน Toptal กดที่แบดจ์เพื่อดูโปรไฟล์ได้",
+ hire_h:"ติดต่อ<br>ร่วมงาน",hire_p:"รับงานฟรีแลนซ์ งานสัญญาจ้าง และงานประจำ",resume:"เรซูเม่ ↗",
+ card:{
+  Post0:{d:"โพสต์ครั้งเดียว แชร์ได้ทุกที่"},Piiman:{d:"มีอะไรในครัว ก็ทำจากสิ่งนั้น"},Nichabit:{d:"ติดตามนิสัยได้ง่าย ๆ"},Leetcards:{d:"วิธีที่ดีที่สุดในการฝึก Leetcode"},OnePushMan:{d:"ออกกำลังแบบ One Punch Man ทุกวัน"},
+  "Ardia browser":{d:"ร่วมพัฒนาเบราว์เซอร์ Chromium ฟรีสำหรับ Mac: ตัวสลับโปรไฟล์ยังแสดงไอคอนของโปรไฟล์ที่ใช้อยู่ แม้โปรไฟล์อื่นจะย่อเหลือเป็นจุด",tag:"ผู้ร่วมพัฒนา · TypeScript"},
+  Smartbanner:{d:"แพ็กเกจ React สำหรับทำ smart app banner ในแบบของคุณเอง"}},
+ stop:{
+  "2017":{k:"Airbnb สำหรับห้องประชุม",b:["ปรับ SEO ของเว็บแอปให้ดีขึ้น 10% ด้วย Ruby on Rails"]},
+  "2020–21":{k:"ผู้ผลิตแผ่นรองเท้า",b:["เพิ่มคะแนน Lighthouse ของเว็บการตลาดจาก 80 เป็น 90","รีแฟกเตอร์โค้ด ลดคอมเมนต์ตอนรีวิวโค้ดลง 30%"]},
+  "2022":{k:"software house ระดับโลก",b:["ทำแอปภายในด้วย Next.js, Rails และ GraphQL ทำให้การเสนอราคาสินค้าสั่งทำเร็วขึ้น 8 เท่า","ย้าย API layer ไปใช้ Docker ทำให้ deploy เร็วขึ้น 50%"]},
+  "2022–24":{k:"ฟินเทคจาก Silicon Valley",b:["ออกแบบ onboarding ให้เข้าใจง่ายขึ้น ยอดสมัครเพิ่ม 7% และการกู้ครั้งแรกเพิ่ม 10%","เพิ่ม UI snapshot test และ end-to-end test ให้เจอบั๊กได้ทันที แทนที่จะรู้หลังผ่านไป 2 วัน"]},
+  "2024–25":{k:"ฟินเทคจาก Silicon Valley",b:["สร้างเว็บแอปสินเชื่อรายย่อยด้วย React และ TypeScript มีผู้ใช้กว่า 1 ล้านคน และ MAU กว่า 1 แสนในปีแรก","เริ่มทำ design system ที่ 4 ทีมใช้ร่วมกัน ออกฟีเจอร์ใหม่ได้เร็วขึ้นราว 4 เท่า","ชนะแฮกกาธอนของบริษัท จากทั้งหมด 24 ทีม"]},
+  "2025–now":{y:"2025–ปัจจุบัน",t:"Software Engineer & Co-founder",k:"ผู้ช่วยทำบัญชี AI ใน LINE",b:["ร่วมก่อตั้ง Zendai ผู้ช่วย AI ที่จดบัญชีให้ร้านค้าจากข้อความแชต รูปสลิป และข้อความเสียงใน LINE"]},
+  "NOW":{y:"ปัจจุบัน",t:"Indie Developer",co:"ทำงานอิสระ",b:["สร้างและปล่อยแอป iOS ของตัวเองภายใต้ Acorn Studio: Piiman, Post0, LeetCards และอื่น ๆ"]}}
+},
+ja:{
+ f_name:"お名前",f_email:"メールアドレス",f_msg:"メッセージ",f_send:"送信する",f_or:"その他の連絡先",back:"← コンセプト",h1:"こんにちは、{キッティ}です。",tagline:"実際に使われるプロダクトを開発しています。",lede:"キッティチョート・カマラピラット。バンコク在住のフロントエンドエンジニアです。React・Next.js・TypeScript を中心に 6 年以上の開発経験があります。EarnIn では 100 万人以上が利用する Web アプリを開発しました。個人開発では、データベースから App Store での公開までフルスタックで担当しています。フリーランス・正社員のご相談を受け付けています。",
+ cta1:"制作実績を見る ↓",cta2:"お問い合わせ",hi:"こんにちは",wfh:"WFH モード",s_skills:"{スキル}",s_made:"{制作実績}",acorn:"Acorn Studio のアプリ ↗",oss:"オープンソース",
+ s_journey:"{経歴}",s_wrote:"{ブログ}",tag_case:"ケーススタディ",tag_essay:"エッセイ",tag_tut:"チュートリアル",
+ p1m:"2026年11月 · 3分",
+ p2m:"2026年11月 · 4分",
+ p3m:"2023年12月 · 2分",
+ s_top:"トップ{3%}",tt:"応募者の上位 3% のみが登録できる、Toptal のフリーランスエンジニアネットワークに登録しています。Toptal 経由でのご依頼は、バッジからプロフィールをご覧ください。",
+ hire_h:"お仕事の<br>ご相談",hire_p:"フリーランス・業務委託・正社員、いずれもご相談ください。",resume:"履歴書 ↗",
+ card:{
+  Post0:{d:"一度の投稿で、どこにでもシェア。"},Piiman:{d:"あるもので、料理しよう。"},Nichabit:{d:"習慣づくりを、かんたんに。"},Leetcards:{d:"Leetcode を勉強するいちばんの方法。"},OnePushMan:{d:"ワンパンマン式トレーニングを毎日。"},
+  "Ardia browser":{d:"Mac 向けの無料 Chromium ブラウザにコントリビュート。ほかのプロフィールがドット表示になっても、使用中のプロフィールのアイコンは残るようにしました。",tag:"コントリビューター · TypeScript"},
+  Smartbanner:{d:"自分好みのスマートアプリバナーを作れる React パッケージ。"}},
+ stop:{
+  "2017":{t:"ソフトウェアエンジニア(インターン)",k:"会議室版の Airbnb",b:["Ruby on Rails で Web アプリの SEO を 10% 改善。"]},
+  "2020–21":{t:"ソフトウェアエンジニア",k:"インソールメーカー",b:["マーケティングサイトの Lighthouse スコアを 80 から 90 に改善。","コードをリファクタリングし、コードレビューでの指摘を 30% 削減。"]},
+  "2022":{t:"ソフトウェアエンジニア",k:"グローバルなソフトウェア開発会社",b:["Next.js・Rails・GraphQL の社内アプリで、カスタム商品の見積もりを 8 倍速く。","API レイヤーを Docker に移行し、デプロイを 50% 高速化。"]},
+  "2022–24":{t:"ソフトウェアエンジニア",k:"シリコンバレーのフィンテック",b:["オンボーディングをわかりやすくして、登録数が 7%、初回の借入が 10% 増加。","UI スナップショットテストと E2E テストを追加し、バグが 2 日後ではなくすぐ見つかるように。"]},
+  "2024–25":{t:"シニアソフトウェアエンジニア",k:"シリコンバレーのフィンテック",b:["React と TypeScript でマイクロローンの Web アプリを開発。初年度でユーザー 100 万人以上、MAU 10 万人以上に。","4 チームが使うデザインシステムを立ち上げ、新機能のリリースが約 4 倍速く。","社内ハッカソンで 24 チーム中優勝。"]},
+  "2025–now":{y:"2025–現在",t:"ソフトウェアエンジニア・共同創業者",k:"LINE で使える AI 帳簿アシスタント",b:["Zendai を共同創業。LINE のチャット、レシートの写真、音声メモからお店の帳簿をつける AI アシスタントです。"]},
+  "NOW":{y:"現在",t:"個人開発者",co:"自営業",b:["Acorn Studio として自分の iOS アプリを開発・リリース中:Piiman、Post0、LeetCards など。"]}}
+}};
+const LANGS=["en","th","ja"],onLang=[];
+const LBL={en:{en:"EN",th:"TH",ja:"JP"},th:{en:"อังกฤษ",th:"ไทย",ja:"ญี่ปุ่น"},ja:{en:"英",th:"タイ",ja:"日"}},FULL={en:"English",th:"ไทย",ja:"日本語"},
+FLAG={en:'<svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="fgb"><path d="M0 0v30h60V0z"/></clipPath><clipPath id="fgt"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><g clip-path="url(#fgb)"><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#fgt)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></g></svg>',
+ th:'<svg class="flag" viewBox="0 0 9 6" aria-hidden="true"><path fill="#A51931" d="M0 0h9v6H0z"/><path fill="#F4F5F8" d="M0 1h9v4H0z"/><path fill="#2D2A4A" d="M0 2h9v2H0z"/></svg>',
+ ja:'<svg class="flag" viewBox="0 0 9 6" aria-hidden="true"><path fill="#fff" d="M0 0h9v6H0z"/><circle cx="4.5" cy="3" r="1.8" fill="#BC002D"/></svg>'},LNAME={en:"Language",th:"ภาษา",ja:"言語"};
+let LANG=(()=>{const q=new URLSearchParams(location.search).get("lang");if(LANGS.includes(q))return q;try{const v=localStorage.getItem("lang");if(LANGS.includes(v))return v}catch(e){}return "en"})();
+function tr(o,f){const L=TX[LANG];if(!L)return o[f];const x=o.y!==undefined?L.stop[o.y]:L.card[o.t];return x&&x[f]!==undefined?x[f]:o[f]}
+function setLang(l,first){
+  LANG=l;document.documentElement.lang=l;
+  document.querySelectorAll("[data-i]").forEach(el=>{if(el._en===undefined)el._en=el.innerHTML;const v=TX[l]&&TX[l][el.dataset.i];
+    if(v===undefined){el.innerHTML=el._en;return}const open=(el._en.match(/<span[^>]*>/)||["<span>"])[0];el.innerHTML=v.replace(/\{(.+?)\}/,open+"$1</span>")});
+  document.querySelectorAll(".lang button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.l===l);b.innerHTML=FLAG[b.dataset.l]+"<span>"+LBL[l][b.dataset.l]+"</span>";b.title=FULL[b.dataset.l];b.setAttribute("aria-label",FULL[b.dataset.l]);b.lang=l});document.querySelector(".lang").setAttribute("aria-label",LNAME[l]);
+  if(!first){try{localStorage.setItem("lang",l)}catch(e){}const u=new URL(location);if(l==="en")u.searchParams.delete("lang");else u.searchParams.set("lang",l);history.replaceState(null,"",u)}
+  onLang.forEach(f=>f())}
+document.querySelector(".lang").addEventListener("click",e=>{const b=e.target.closest("button");if(b&&b.dataset.l!==LANG)setLang(b.dataset.l)});
+
+const A="https://www.theacorn.studio/";
+const P=[
+ {t:"Post0",d:"Post once. Share everywhere.",img:"../assets/apps/post0.svg",u:A+"post0",tag:"iOS · Social",c:"var(--p)"},
+ {t:"Piiman",d:"Cook what you find.",img:"../assets/apps/piiman.svg",u:"https://apps.apple.com/us/app/piiman-recipe-saver/id6812401240",tag:"iOS · AI · Recipes",c:"var(--g)"},
+ {t:"Nichabit",d:"Habit tracking made easy.",img:"../assets/apps/nichabit.svg",u:"https://apps.apple.com/us/app/nichabit-daily-habit-tracker/id6761253038",tag:"iOS · Habits",c:"var(--y)"},
+ {t:"Leetcards",d:"The best way to study Leetcode.",img:"../assets/apps/leetcards.webp",u:"https://apps.apple.com/us/app/leetcards/id6502571848",tag:"iOS · Study",c:"var(--b)"},
+ {t:"OnePushMan",d:"One Punch Man workout. Every day.",img:"../assets/apps/onepushman.svg",u:"https://apps.apple.com/us/app/push-up-tracker-onepushman/id6777450002",tag:"iOS · Fitness",c:"var(--o)"},
+];
+const O=[
+ {t:"Ardia browser",d:"Contributed to a free Chromium browser for the Mac: the profile switcher now keeps the active profile's icon when the rest fall back to dots.",img:"../assets/apps/ardia.svg",u:"https://github.com/ardia-browser/ardia/pull/2742",tag:"Contributor · TypeScript",c:"var(--g)"},
+ {t:"Smartbanner",d:"React package for custom smart app banners.",img:"../assets/smartbanner.svg",u:"https://www.npmjs.com/package/custom-react-smartbanner",tag:"npm · React",c:"var(--v)",wide:1},
+];
+const card=p=>`<a class="stk" href="${p.u}" target="_blank" rel="noopener"><div class="im${p.wide?" wide":""}" style="--c:${p.c}"><img src="${p.img}" alt="${p.t}"></div><h4>${p.t} ↗</h4><p>${tr(p,"d")}</p><small>${tr(p,"tag")}</small></a>`;
+function renderCards(){document.getElementById("stk").innerHTML=P.map(card).join("");document.getElementById("oss").innerHTML=O.map(card).join("")}
+
+renderCards();onLang.push(renderCards);
+
+// touch screens have no hover: tap the illustration to switch outfits
+const me=document.getElementById("me");me.addEventListener("click",()=>me.classList.toggle("on"));
+
+// ---------- skills: icons fly in, then now and then one slips out and pops back from another side
+const SK=[["TypeScript","typescript"],["React & React Native","react"],["Next.js","nextjs"],["JavaScript","javascript"],["Node.js","nodejs"],["Tailwind CSS","tailwindcss"],["GraphQL","graphql"],["iOS · Swift","swift"],["Python","python"],["PostgreSQL","postgresql"],["Firebase","firebase"],["Docker","docker"],["Google Cloud","googlecloud"],["Jest","jest"],["OpenAI","openai"],["Claude","claude"]];
+const skl=document.getElementById("skl"),field=document.getElementById("field");
+skl.innerHTML=SK.map(([n,f])=>`<li class="sk"><span class="wave"><span class="tile"><img src="../assets/skills/${f}.svg" alt="${n}" width="44" height="44"></span></span><span class="lbl">${n}</span></li>`).join("");
+const motionOK=matchMedia("(prefers-reduced-motion: no-preference)").matches;
+const DIRS=[[-1,0],[1,0],[0,-1],[0,1]],dir=()=>DIRS[Math.random()*4|0],rand=(a,b)=>a+Math.random()*(b-a);
+const BACK="cubic-bezier(.34,1.7,.5,1)";
+if(motionOK){
+  const lis=[...skl.children],waves=lis.map(l=>l.firstElementChild);let visible=false;
+  lis.forEach(l=>l.style.opacity=0);
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting},{}).observe(field);
+  const enter=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;enter.disconnect();
+    lis.forEach((l,i)=>{const [x,y]=dir();l.style.opacity="";
+      l.animate([{transform:`translate(${x*80}px,${y*80}px) scale(.4) rotate(${rand(-35,35)}deg)`,opacity:0,filter:"blur(12px)"},{transform:"none",opacity:1,filter:"blur(0)"}],
+        {duration:1100,delay:i*60,easing:BACK,fill:"backwards"}).finished.then(()=>idle(i))})},{rootMargin:"0px 0px -15% 0px"});
+  enter.observe(field);
+  const idle=i=>setTimeout(()=>hop(i),rand(2000,7000));
+  async function hop(i){
+    if(!visible||document.hidden)return idle(i);
+    const w=waves[i],[ax,ay]=dir(),[bx,by]=dir(),out={transform:`translate(${ax*56}px,${ay*56}px) scale(.7)`,opacity:0,filter:"blur(8px)"};
+    const a=w.animate([{transform:"none",opacity:1,filter:"blur(0)"},out],{duration:450,easing:"cubic-bezier(.5,0,.75,0)",fill:"forwards"});
+    await a.finished;await new Promise(r=>setTimeout(r,200));
+    const b=w.animate([{transform:`translate(${bx*56}px,${by*56}px) scale(.7)`,opacity:0,filter:"blur(8px)"},{transform:"none",opacity:1,filter:"blur(0)"}],{duration:800,easing:BACK});
+    a.cancel();await b.finished;idle(i)}
+  // dock-style magnify near the cursor
+  if(matchMedia("(hover: hover) and (pointer: fine)").matches){
+    const tiles=lis.map(l=>l.querySelector(".tile")),spot=field.querySelector(".spot"),cur=tiles.map(()=>({s:1,y:0})),tgt=tiles.map(()=>({s:1,y:0}));let sx=0,sy=0,tx=0,ty=0,raf=0;
+    const tick=()=>{let moving=false;sx+=(tx-sx)*.18;sy+=(ty-sy)*.18;spot.style.transform=`translate(${sx}px,${sy}px)`;
+      tiles.forEach((t,i)=>{const c=cur[i],g=tgt[i];c.s+=(g.s-c.s)*.2;c.y+=(g.y-c.y)*.2;if(Math.abs(g.s-c.s)>.002||Math.abs(g.y-c.y)>.05)moving=true;t.style.transform=`translateY(${c.y}px) scale(${c.s})`});
+      if(moving||Math.abs(tx-sx)>.5||Math.abs(ty-sy)>.5)raf=requestAnimationFrame(tick);else raf=0};
+    const kick=()=>{if(!raf)raf=requestAnimationFrame(tick)};
+    field.addEventListener("pointermove",e=>{const r=field.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;
+      tiles.forEach((t,i)=>{const b=t.parentElement.getBoundingClientRect(),d=Math.hypot(e.clientX-(b.left+b.width/2),e.clientY-(b.top+b.height/2)),o=Math.max(0,1-d/160),k=o*o*(3-2*o);tgt[i].s=1+.4*k;tgt[i].y=-16*k});kick()});
+    field.addEventListener("pointerenter",e=>{const r=field.getBoundingClientRect();sx=tx=e.clientX-r.left;sy=ty=e.clientY-r.top;field.classList.add("hot")});
+    field.addEventListener("pointerleave",()=>{field.classList.remove("hot");tgt.forEach(g=>{g.s=1;g.y=0});kick()});
+  }
+}
+
+// ---------- journey: a road draws itself as you scroll, and each stop pops in when the road reaches it
+const STOPS=[
+ {y:"2017",c:"#fff",t:"Software Engineer Intern",co:"Spacee.jp",u:"https://www.spacee.co.jp/",k:"Airbnb for meeting rooms",b:["Improved the web app's SEO by 10% in Ruby on Rails."]},
+ {y:"2020–21",c:"var(--v)",t:"Software Engineer",co:"F Style",k:"insole manufacturer",b:["Raised the marketing site's Lighthouse score from 80 to 90.","Refactored the codebase and cut code review comments by 30%."]},
+ {y:"2022",c:"#204ecf",t:"Software Engineer",co:"Toptal",lg:"toptal.png",pad:1,u:"https://www.toptal.com/",k:"global software house",b:["Made custom product quoting 8x faster with an internal app in Next.js, Rails and GraphQL.","Moved the API layer to Docker for 50% faster deploys."]},
+ {y:"2022–24",c:"#ffe33b",t:"Software Engineer",co:"EarnIn",lg:"earnin.png",u:"https://www.earnin.com/",k:"Silicon Valley fintech",b:["A clearer onboarding flow lifted sign-ups by 7% and first loans by 10%.","Added UI snapshot and end-to-end tests, so bugs surface instantly instead of after 2 days."]},
+ {y:"2024–25",c:"#ffe33b",t:"Senior Software Engineer",co:"EarnIn",lg:"earnin.png",u:"https://www.earnin.com/",k:"Silicon Valley fintech",b:["Built a micro-loan web app in React and TypeScript that reached 1M+ users and 100K+ MAU in its first year.","Started a design system used by 4 teams, shipping new features about 4x faster.","Won the company hackathon out of 24 teams."]},
+ {y:"2025–now",c:"#feae59",t:"Software Engineer & Co-founder",co:"Zendai Digital",lg:"zendai.svg",u:"https://zendaibills.com/",k:"AI bookkeeping in LINE",b:["Co-founded Zendai, an AI assistant that keeps a shop's books from chat messages, receipt photos and voice notes in LINE."]},
+ {y:"NOW",c:"var(--y)",t:"Indie hacker",co:"Self-employed",k:"",b:["Building and shipping my own iOS apps under Acorn Studio: Piiman, Post0, LeetCards and more."]},
+];
+const jr=document.getElementById("jr"),head=jr.querySelector(".head"),edge=jr.querySelector(".edge"),fill=jr.querySelector(".fill"),road=jr.querySelector("svg");
+jr.insertAdjacentHTML("beforeend",STOPS.map((s,i)=>`<div class="stop ${i%2?"r":"l"}">${s.lg?`<img class="lg${s.pad?" pad":""}" src="../assets/co/${s.lg}" alt="${s.co} logo">`:""}<span class="yr" style="background:${s.c}${s.c==="#204ecf"?";color:#fff":""}">${tr(s,"y")}</span><h4>${tr(s,"t")}</h4><div class="co">${s.u?`<a href="${s.u}" target="_blank" rel="noopener">${s.co} ↗</a>`:tr(s,"co")}${s.k?` <i>· ${tr(s,"k")}</i>`:""}</div><ul>${tr(s,"b").map(x=>`<li>${x}</li>`).join("")}</ul></div>`).join(""));
+const stops=[...jr.querySelectorAll(".stop")];
+stops.forEach((s,i)=>{const d=document.createElement("span");d.className="dot";d.style.background=STOPS[i].c;jr.appendChild(d);s.dot=d});
+let L=0,marks=[],ys=[];
+function layoutJR(){
+  const narrow=innerWidth<=900,R=narrow?18:60;
+  // the first gap holds the loop, so give it room on wide screens
+  stops[0].style.marginBottom=narrow?"":"90px";
+  const W=jr.clientWidth,H=jr.clientHeight,cx=narrow?34:W/2,pts=[];
+  stops.forEach((s,i)=>{const y=s.offsetTop+46,x=narrow?34:cx+(i%2?1:-1)*Math.min(46,W*.04);pts.push([x,y]);s.dot.style.left=x+"px";s.dot.style.top=y+"px"});
+  let d=`M ${cx} 0`,px=cx,py=0;
+  pts.forEach(([x,y],i)=>{
+    if(i===1){
+      // one loop-the-loop on the way to the second stop: swing past it, circle once, drop straight down onto it
+      const sd=narrow?1:Math.sign(x-px)||1,Lx=x+sd*.92*R,Ly=py+(y-py)*.45,sw=sd>0?0:1;
+      d+=` C ${px} ${py+(Ly+R-py)*.6}, ${Lx-sd*R*1.1} ${Ly+R}, ${Lx} ${Ly+R}`;
+      d+=` A ${R} ${R} 0 0 ${sw} ${Lx+sd*R} ${Ly} A ${R} ${R} 0 0 ${sw} ${Lx} ${Ly-R}`;
+      d+=` C ${Lx-sd*R*.6} ${Ly-R}, ${x} ${Ly-R*.5}, ${x} ${Ly+R*.3} L ${x} ${y}`;
+    }else{const my=(py+y)/2;d+=` C ${px} ${my}, ${x} ${my}, ${x} ${y}`}
+    px=x;py=y});
+  road.setAttribute("viewBox",`0 0 ${W} ${H}`);road.querySelectorAll("path").forEach(p=>p.setAttribute("d",d));
+  L=edge.getTotalLength();[edge,fill].forEach(p=>p.style.strokeDasharray=`${L} ${L}`);
+  // length along the road where each dot sits (the loop doubles back, so search by distance, not by height)
+  const samples=[];for(let l=0;l<=L;l+=4){const q=edge.getPointAtLength(l);samples.push([l,q.x,q.y])}
+  ys=pts.map(p=>p[1]);
+  marks=pts.map(([x,y])=>{let best=0,bd=1e9;for(const [l,qx,qy] of samples){const dd=(qx-x)**2+(qy-y)**2;if(dd<bd){bd=dd;best=l}}return best});
+  onRoad()}
+function onRoad(){
+  const r=jr.getBoundingClientRect(),ty=motionOK?innerHeight*.6-r.top:1e9;
+  // map how far down we've scrolled onto length along the road, stop by stop, so the head keeps pace through the loop
+  let len;if(ty<=0)len=0;else if(ty>=ys[ys.length-1])len=L;else if(ty<ys[0])len=marks[0]*ty/ys[0];
+  else{let i=0;while(ty>ys[i+1])i++;len=marks[i]+(marks[i+1]-marks[i])*(ty-ys[i])/(ys[i+1]-ys[i])}
+  const k=len/L;
+  [edge,fill].forEach(p=>p.style.strokeDashoffset=L-len);
+  const p=edge.getPointAtLength(Math.max(0.01,len));head.style.transform=`translate(${p.x}px,${p.y}px)`;head.style.opacity=k>0&&k<1?1:k>=1?1:0;
+  stops.forEach((s,i)=>{const on=len>=marks[i]-30;s.classList.toggle("in",on);s.dot.classList.toggle("in",on)})}
+function retextStops(){stops.forEach((el,i)=>{const s=STOPS[i];el.querySelector(".yr").textContent=tr(s,"y");el.querySelector("h4").textContent=tr(s,"t");
+  if(!s.u)el.querySelector(".co").firstChild.textContent=tr(s,"co");const k=el.querySelector(".co i");if(k)k.textContent="· "+tr(s,"k");
+  el.querySelector("ul").innerHTML=tr(s,"b").map(x=>`<li>${x}</li>`).join("")});layoutJR()}
+onLang.push(retextStops);
+addEventListener("scroll",onRoad,{passive:true});addEventListener("resize",layoutJR);
+document.fonts.ready.then(layoutJR);layoutJR();
+setLang(LANG,true);
+// ---------- contact form: posts to a small Vercel function that emails me through Resend
+const MSG={en:{sending:"Sending…",ok:"Thanks! Your message is on its way. I'll reply by email.",err:"Something went wrong. Please try again, or reach me on LinkedIn.",bad:"Please fill in your name, a valid email and a message."},
+ th:{sending:"กำลังส่ง…",ok:"ส่งข้อความเรียบร้อยแล้ว จะติดต่อกลับทางอีเมล",err:"ส่งไม่สำเร็จ กรุณาลองใหม่อีกครั้ง หรือติดต่อทาง LinkedIn",bad:"กรุณากรอกชื่อ อีเมล และข้อความให้ครบถ้วน"},
+ ja:{sending:"送信中…",ok:"送信しました。メールにてご連絡いたします。",err:"送信できませんでした。もう一度お試しいただくか、LinkedIn からご連絡ください。",bad:"お名前、メールアドレス、メッセージをご入力ください。"}};
+const cform=document.getElementById("cform"),cstatus=document.getElementById("cstatus");
+cform.addEventListener("submit",async e=>{e.preventDefault();const f=new FormData(cform),d=Object.fromEntries(f),t=MSG[LANG];
+  const say=(m,c)=>{cstatus.textContent=m;cstatus.className="status "+(c||"")};
+  if(!d.name.trim()||!d.message.trim()||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim()))return say(t.bad,"err");
+  const btn=cform.querySelector("button");btn.disabled=true;say(t.sending);
+  try{const r=await fetch("https://portfolio-contact-kittichoteshanes-projects.vercel.app/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...d,lang:LANG})});
+    const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw 0;cform.reset();say(t.ok,"ok")}catch(_){say(t.err,"err")}finally{btn.disabled=false}});
+
+</script>
+</body>
+</html>
